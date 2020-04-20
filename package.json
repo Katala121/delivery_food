@@ -1,0 +1,30 @@
+{
+  "name": "delivery_food",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "eslint": "eslint src/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Katala121/delivery_food.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Katala121/delivery_food/issues"
+  },
+  "homepage": "https://github.com/Katala121/delivery_food#readme",
+  "dependencies": {
+    "express": "4.17.1",
+    "husky": "4.2.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run eslint"
+    }
+  }
+}
