@@ -1,6 +1,6 @@
 import express from 'express';
-import Auth from '../Authentication/Auth.js';
-import UserController from '../Controllers/UserController.js';
+import Auth from '../authentication/Auth.js';
+import UserController from '../controllers/UserController.js';
 import AvatarUpload from '../files/AvatarUpload.js';
 
 class UserRouter {
@@ -12,20 +12,20 @@ class UserRouter {
         this._avatarUpload = new AvatarUpload();
 
         this._router.route('/registration').post(this._userController.registration);
-        this._router.route('/registration/avatar').post(this._avatarUpload.upload, (req, res) => {
-            // реализовать обработку аватарки и добавить путь к ней в базу данных!!!
-            res.send('Uploaded');
-        });
         this._router.route('/login').post(this._userController.login);
 
         this._router.use('/:id', this._auth.checkUser);
         this._router.route('/:id').get(this._userController.getUser);
         this._router.route('/:id').put(this._userController.update);
+        this._router.route('/:id/avatar').post(this._avatarUpload.upload, (req, res) => {
+            // реализовать обработку аватарки и добавить путь к ней в базу данных!!!
+            res.send('Uploaded');
+        });
         this._router.route('/:id').delete(this._userController.delete);
 
         // this._router.use('/:id/basket', this._auth.checkUser);
         this._router.route('/:id/basket').get(this._userController.getBasket);
-        this._router.route('/:id/basket').put(this._userController.updateBasket);
+        this._router.route('/:id/basket').put(this._userController.addDishInBasket);
 
         // this._router.use('/:id/orders', this._auth.checkUser);
         this._router.route('/:id/orders').get(this._userController.getOrders);

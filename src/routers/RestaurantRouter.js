@@ -1,5 +1,5 @@
 import express from 'express';
-import RestaurantController from '../Controllers/RestaurantController.js';
+import RestaurantController from '../controllers/RestaurantController.js';
 
 class RestaurantRouter  {
     constructor() {

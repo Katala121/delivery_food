@@ -1,6 +1,6 @@
 import express from 'express';
 // import Auth from '../Authentication/auth.js';
-import AdminController from '../Controllers/AdminController.js';
+import AdminController from '../controllers/AdminController.js';
 
 class AdminRouter  {
     constructor() {

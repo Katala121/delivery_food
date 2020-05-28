@@ -1,5 +1,5 @@
 import jwt            from 'jsonwebtoken';
-import UserRepository from '../Repositiories/UserRepository.js';
+import UserRepository from '../repositiories/UserRepository.js';
 import pool           from '../database.js';
 
 class Auth {

@@ -5,7 +5,7 @@ class BasketRepository {
         this._pool = pool;
     }
 
-    async create({ id }) {
+    async createBasket({ id }) {
         try {
             await this._pool.query(
                 'INSERT INTO public."baskets" (user_id) VALUES ($1) RETURNING *;',
@@ -45,6 +45,10 @@ class BasketRepository {
         } catch (error) {
             throw Error(error);
         }
+    }
+
+    async addDishInBasket() {
+        return 'added dish in basket of user';
     }
 }
 

@@ -1,8 +1,8 @@
-// import bcrypt           from 'bcryptjs';
+import bcrypt           from 'bcryptjs';
 // import jwt              from 'jsonwebtoken';
-import OrderRepository  from '../Repositiories/OrderRepository.js';
-import AdminRepository  from '../Repositiories/AdminRepository.js';
-import RestaurantRepository  from '../Repositiories/RestaurantRepository.js';
+import OrderRepository  from '../repositiories/OrderRepository.js';
+import AdminService  from '../services/AdminService.js';
+import RestaurantRepository  from '../repositiories/RestaurantRepository.js';
 
 class AdminController {
     constructor() {
@@ -15,19 +15,33 @@ class AdminController {
         this.updateOrder = this.updateOrder.bind(this);
         this.deleteOrder = this.deleteOrder.bind(this);
 
-        this.adminRepository = new AdminRepository();
+        this.adminService = new AdminService();
         this.orderRepository = new OrderRepository();
         this.restaurantRepository = new RestaurantRepository();
     }
 
     async registration(request, response) {
-        const admin = await this.adminRepository.create();
+        const { nameAdmin } = request.body;
+        const { password } = request.body;
+        const { nameRestaurant } = request.body;
+        const { description } = request.body;
 
-        response.send(admin);
+        const salt = bcrypt.genSaltSync(15);
+        const hash = bcrypt.hashSync(password, salt);
+
+        try {
+            const admin = await this.adminService.registration({
+                nameAdmin, password: hash, nameRestaurant, description,
+            });
+
+            response.send(admin);
+        } catch (error) {
+            next(new Error(error));
+        }
     }
 
     async login(request, response) {
-        const admin = await this.adminRepository.findByRestarantId();
+        const admin = await this.adminService.findByRestarantId();
 
         response.send(admin);
     }

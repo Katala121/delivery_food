@@ -1,8 +1,8 @@
 import express          from 'express';
 import process          from 'process';
-import UserRouter       from './Routers/UserRouter.js';
-import AdminRouter      from './Routers/AdminRouter.js';
-import RestaurantRouter from './Routers/RestaurantRouter.js';
+import UserRouter       from './routers/UserRouter.js';
+import AdminRouter      from './routers/AdminRouter.js';
+import RestaurantRouter from './routers/RestaurantRouter.js';
 import pool           from './database.js';
 
 const app = express();
