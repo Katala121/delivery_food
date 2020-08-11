@@ -16,12 +16,14 @@ class UserRepository {
                     'INSERT INTO public."users" (email, name, surname, password) VALUES ($1, $2, $3, $4) RETURNING *;',
                     [email, name, surname, password],
                 );
+                console.log(userRawData);
                 await this._pool.query(
                     'INSERT INTO public."baskets" (user_id) VALUES ($1) RETURNING id;',
                     [userRawData.rows[0].id],
                 );
                 await this._pool.query('COMMIT');
             } catch (error) {
+                console.log(error);
                 this._pool.query('ROLLBACK');
             }
             return new User({

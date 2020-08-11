@@ -21,12 +21,13 @@ class UserService {
             const user = await this.userRepository.createUserAndBasket({
                 name, surname, email, password,
             });
+            console.log(user);
 
             user._token = jwt.sign({
                 email: user.email,
                 name: user.name,
                 id: user.id,
-            }, user.password, {
+            }, password, {
                 expiresIn: '24h',
             });
             return user;

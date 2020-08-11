@@ -18,6 +18,7 @@ class UserRouter {
         this._router.route('/:id').get(this._userController.getUser);
         this._router.route('/:id').put(this._userController.update);
         this._router.route('/:id/avatar').post(this._avatarUpload.upload, (req, res) => {
+            console.log('loaded');
             // реализовать обработку аватарки и добавить путь к ней в базу данных!!!
             res.send('Uploaded');
         });

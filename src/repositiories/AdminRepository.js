@@ -18,7 +18,7 @@ class AdminRepository {
                     [nameRestaurant, description],
                 );
                 adminRawData = await this._pool.query(
-                    'INSERT INTO public."admins" (name, password, restarant) VALUES ($1, $2, $3) RETURNING *;',
+                    'INSERT INTO public."admins" (name, password, restaurant) VALUES ($1, $2, $3) RETURNING *;',
                     [nameAdmin, password, restaurantRawData.rows[0].id],
                 );
                 await this._pool.query('COMMIT');
