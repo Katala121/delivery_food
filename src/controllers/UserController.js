@@ -15,6 +15,7 @@ class UserController {
         this.delete = this.delete.bind(this);
         this.getBasket = this.getBasket.bind(this);
         this.addDishInBasket = this.addDishInBasket.bind(this);
+        this.deleteDishFromBasket = this.deleteDishFromBasket.bind(this);
         this.getOrders = this.getOrders.bind(this);
         this.createOrder = this.createOrder.bind(this);
         this.getAddress = this.getAddress.bind(this);
@@ -41,8 +42,9 @@ class UserController {
             const user = await this.userService.registration({
                 name, surname, email, password: hash,
             });
-
-            response.send(user);
+            if ( user.message ) {
+                response.send(user.message);
+            } else response.send(user);
         } catch (error) {
             next(new Error(error));
         }
@@ -54,9 +56,11 @@ class UserController {
 
         try {
             const user = await this.userService.login(email, password);
-            response.send(user);
+            if ( user.message ) {
+                response.send(user.message);
+            } else response.send(user);
         } catch (error) {
-            next(new Error('Login error'));
+            next(new Error('Login error!!!'));
         }
     }
 
@@ -69,7 +73,6 @@ class UserController {
         } else {
             next(new Error('Invalid user information'));
         }
-        response.send('user');
     }
 
     async update(request, response, next) {
@@ -84,7 +87,9 @@ class UserController {
             const updatedUser = await this.userService.update({
                 id, name, surname, password, email, user,
             });
-            response.send(updatedUser);
+            if ( updatedUser.message ) {
+                response.send(updatedUser.message);
+            } else response.send(updatedUser);
         } catch (error) {
             next(new Error('Update error'));
         }
@@ -95,7 +100,9 @@ class UserController {
         const { user } = request;
         try {
             const res = await this.userService.delete({ id, user });
-            response.send(res);
+            if ( res.message ) {
+                response.send(res.message);
+            } else response.send(res);
         } catch (error) {
             next(new Error('Delete error'));
         }
@@ -107,7 +114,9 @@ class UserController {
         try {
             if (user !== undefined && user.id === id) {
                 const basketUser = await this.basketRepository.get(id);
-                response.send(basketUser);
+                if ( basketUser.message ) {
+                    response.send(basketUser.message);
+                } else response.send(basketUser);
             } else {
                 next(new Error('Invalid user information'));
             }
@@ -118,12 +127,32 @@ class UserController {
 
     async addDishInBasket(request, response, next) {
         const { id } = request.params;
-        // const { dishe_id } = request.params;
+        const { dish_id } = request.params;
         const { user } = request;
         try {
             if (user !== undefined && user.id === id) {
-                const basketUser = await this.basketRepository.addDishInBasket(id);
-                response.send(basketUser);
+                const basketUser = await this.basketRepository.addDishInBasket({id, dish_id});
+                if ( basketUser.message ) {
+                    response.send(basketUser.message);
+                } else response.send(basketUser);
+            } else {
+                next(new Error('Invalid user information'));
+            }
+        } catch (error) {
+            next(new Error('Update basket error'));
+        }
+    }
+
+    async deleteDishFromBasket(request, response, next) {
+        const { id } = request.params;
+        const { dish_id } = request.params;
+        const { user } = request;
+        try {
+            if (user !== undefined && user.id === id) {
+                const basketUser = await this.basketRepository.deleteDishFromBasket({id, dish_id});
+                if ( basketUser.message ) {
+                    response.send(basketUser.message);
+                } else response.send(basketUser);
             } else {
                 next(new Error('Invalid user information'));
             }

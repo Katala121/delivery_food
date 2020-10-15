@@ -20,7 +20,6 @@ class AvatarUpload {
 
     upload() {
         multer({ storage: this.storage() }).single('avatar');
-        // console.log('loaded');
     }
 }
 

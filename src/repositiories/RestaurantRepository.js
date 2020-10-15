@@ -1,9 +1,9 @@
-// import Restaurant from '../Models/Restaurant.js';
+import Restaurant from '../models/Restaurant.js';
 
 class RestaurantRepository {
-    // constructor() {
-    // this._pool = pool;
-    // }
+    constructor(pool) {
+    this._pool = pool;
+    }
 
     async getAll() {
         return 'get restaurants';
@@ -21,8 +21,21 @@ class RestaurantRepository {
         return 'deleted restaurant';
     }
 
-    async get() {
-        return 'get restaurant';
+    async findByRestaurantId(id) {
+        try {
+            const restaurantRawData = await this._pool.query(
+                'SELECT * FROM public."restaurants" where id=(SELECT restaurant_id FROM public."admins" where id=$1);',
+                [id],
+            );
+            const restaurant = new Restaurant({
+                id: restaurantRawData.rows[0].id,
+                name: restaurantRawData.rows[0].name,
+                description: restaurantRawData.rows[0].description,
+            });
+            return restaurant;
+        } catch (error) {
+            throw Error(error);
+        }
     }
 }
 

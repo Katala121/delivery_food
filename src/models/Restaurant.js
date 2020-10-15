@@ -1,6 +1,7 @@
 class Restaurant {
-    constructor(id, description) {
+    constructor({ id, name, description }) {
         this._id = id;
+        this._name = name;
         this._description = description;
     }
 
@@ -16,9 +17,18 @@ class Restaurant {
         this._description = newValue;
     }
 
+    get name() {
+        return this._name;
+    }
+
+    set name(newValue) {
+        this._name = newValue;
+    }
+
     toJSON() {
         return {
             id: this.id,
+            name: this.name,
             description: this.description,
         };
     }

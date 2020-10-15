@@ -2,6 +2,7 @@ import express from 'express';
 import Auth from '../authentication/Auth.js';
 import UserController from '../controllers/UserController.js';
 import AvatarUpload from '../files/AvatarUpload.js';
+import multer from 'multer';
 
 class UserRouter {
     constructor(pool) {
@@ -17,16 +18,18 @@ class UserRouter {
         this._router.use('/:id', this._auth.checkUser);
         this._router.route('/:id').get(this._userController.getUser);
         this._router.route('/:id').put(this._userController.update);
-        this._router.route('/:id/avatar').post(this._avatarUpload.upload, (req, res) => {
-            console.log('loaded');
-            // реализовать обработку аватарки и добавить путь к ней в базу данных!!!
-            res.send('Uploaded');
-        });
         this._router.route('/:id').delete(this._userController.delete);
+        // this._router.route('/:id/avatar').post(this.upload, (req, res) => {
+        //     console.log('loaded');
+        //     // реализовать обработку аватарки и добавить путь к ней в базу данных!!!
+        //     res.send('Uploaded');
+        // });
 
-        // this._router.use('/:id/basket', this._auth.checkUser);
+        this._router.use('/:id/basket', this._auth.checkUser);
         this._router.route('/:id/basket').get(this._userController.getBasket);
-        this._router.route('/:id/basket').put(this._userController.addDishInBasket);
+        this._router.use('/:id/basket/:dish_id', this._auth.checkUser);
+        this._router.route('/:id/basket/:dish_id').post(this._userController.addDishInBasket);
+        this._router.route('/:id/basket/:dish_id').delete(this._userController.deleteDishFromBasket);
 
         // this._router.use('/:id/orders', this._auth.checkUser);
         this._router.route('/:id/orders').get(this._userController.getOrders);

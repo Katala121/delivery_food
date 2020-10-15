@@ -1,8 +1,8 @@
 class Admin {
-    constructor(id, name, restaurant) {
+    constructor({ id, name, restaurant }) {
         this._id = id;
         this._name = name;
-        this._restaurant = restaurant;
+        this._restaurant_id = restaurant;
     }
 
     get id() {
@@ -18,11 +18,11 @@ class Admin {
     }
 
     get restaurant() {
-        return this._restaurant;
+        return this._restaurant_id;
     }
 
     set restaurant(newValue) {
-        this._restaurant = newValue;
+        this._restaurant_id = newValue;
     }
 
     get password() {
