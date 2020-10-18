@@ -39,25 +39,18 @@ class DishRepository {
 
     async findAllByAdminId({ id }) {
         try {
-            let dishesRawData; let
-                categoryRawData;
+            let dishesRawData;
             await this._pool.query('BEGIN');
             try {
                 dishesRawData = await this._pool.query(
                     'SELECT * FROM public."dishes" where restaurant_id=(SELECT restaurant_id FROM public."admins" where id=$1);',
                     [id],
                 );
-                console.log(dishesRawData.rows);
-                return dishesRawData.rows.map((dish) => new Dish({
-                    id: dish.id,
-                    description: dish.description,
-                    price: dish.price,
-                    category: dish.category_id,
-                }));
             } catch (error) {
                 console.log(error);
                 this._pool.query('ROLLBACK');
             }
+            return dishesRawData.rows;
         } catch (error) {
             throw Error(error);
         }
@@ -69,7 +62,7 @@ class DishRepository {
                 'SELECT * FROM public."dishes" where id=$1 and restaurant_id=(SELECT restaurant_id FROM public."admins" where id=$2);',
                 [dish_id, id],
             );
-            if (dish.rows.length == 0) {
+            if (dish.rows.length === 0) {
                 return new Error('Invalid dish or admin information');
             }
             return new Dish({
@@ -96,7 +89,7 @@ class DishRepository {
                     [description, price, category, id, dish_id, 'link'],
                 );
 
-                if (dishRawData.rows.length == 0) {
+                if (dishRawData.rows.length === 0) {
                     return new Error('Invalid dish or admin information');
                 }
 
@@ -126,7 +119,7 @@ class DishRepository {
                 'DELETE FROM public."dishes" WHERE id=$1 and restaurant_id=(SELECT restaurant_id FROM public."admins" where id=$2) RETURNING description;',
                 [dish_id, id],
             );
-            if (dish.rows.length == 0) {
+            if (dish.rows.length === 0) {
                 return new Error('Invalid dish or admin information');
             }
             return dish;

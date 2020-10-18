@@ -70,6 +70,7 @@ class AdminRepository {
 
     async deleteAdminAndRestaurant(id) {
         try {
+            let restaurant;
             await this._pool.query('BEGIN');
             try {
                 const restaurant_idRawData = await this._pool.query(
@@ -105,15 +106,15 @@ class AdminRepository {
                     'DELETE FROM public."admins" WHERE restaurant_id=$1;',
                     [restaurantId],
                 );
-                const restaurant = await this._pool.query(
+                restaurant = await this._pool.query(
                     'DELETE FROM public."restaurants" WHERE id=$1 RETURNING name;',
                     [restaurantId],
                 );
                 await this._pool.query('COMMIT');
-                return restaurant;
             } catch (error) {
                 this._pool.query('ROLLBACK');
             }
+            return restaurant;
         } catch (error) {
             throw Error(error);
         }

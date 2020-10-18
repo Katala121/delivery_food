@@ -65,7 +65,7 @@ class AdminService {
         nameAdmin, password, nameRestaurant, description, id, admin,
     }) {
         try {
-            if (admin !== undefined && admin.id == id) {
+            if (admin !== undefined && admin.id === +id) {
                 const salt = bcrypt.genSaltSync(15);
                 const hash = bcrypt.hashSync(password, salt);
                 const updatedAdmin = await this.adminRepository.update({
@@ -90,7 +90,7 @@ class AdminService {
         id, admin,
     }) {
         try {
-            if (admin !== undefined && admin.id == id) {
+            if (admin !== undefined && admin.id === +id) {
                 const restaurant = await this.adminRepository.deleteAdminAndRestaurant(id);
                 return `${restaurant.rows[0].name} deleted`;
             }
@@ -104,7 +104,7 @@ class AdminService {
         id, description, price, category, admin,
     }) {
         try {
-            if (admin !== undefined && admin.id == id) {
+            if (admin !== undefined && admin.id === +id) {
                 const dish = await this.dishRepository.create({
                     id, description, price, category,
                 });
@@ -118,7 +118,7 @@ class AdminService {
 
     async getAllDishes({ id, admin }) {
         try {
-            if (admin !== undefined && admin.id == id) {
+            if (admin !== undefined && admin.id === +id) {
                 const allDishes = await this.dishRepository.findAllByAdminId({ id });
                 return allDishes;
             }
@@ -130,7 +130,7 @@ class AdminService {
 
     async getDish({ id, dish_id, admin }) {
         try {
-            if (admin !== undefined && admin.id == id) {
+            if (admin !== undefined && admin.id === +id) {
                 const dish = await this.dishRepository.findByDish_Id({ id, dish_id });
                 return dish;
             }
@@ -144,7 +144,7 @@ class AdminService {
         id, description, price, category, dish_id, admin,
     }) {
         try {
-            if (admin !== undefined && admin.id == id) {
+            if (admin !== undefined && admin.id === +id) {
                 const dish = await this.dishRepository.update({
                     id, description, price, category, dish_id,
                 });
@@ -158,7 +158,7 @@ class AdminService {
 
     async deleteDish({ id, dish_id, admin }) {
         try {
-            if (admin !== undefined && admin.id == id) {
+            if (admin !== undefined && admin.id === +id) {
                 const dish = await this.dishRepository.delete({ id, dish_id });
                 return `${dish.rows[0].description} deleted`;
             }

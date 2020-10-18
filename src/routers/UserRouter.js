@@ -1,5 +1,5 @@
 import express from 'express';
-import multer from 'multer';
+// import multer from 'multer';
 import Auth from '../authentication/Auth.js';
 import UserController from '../controllers/UserController.js';
 import AvatarUpload from '../files/AvatarUpload.js';
