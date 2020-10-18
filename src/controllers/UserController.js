@@ -1,10 +1,9 @@
 import bcrypt           from 'bcryptjs';
-// import jwt              from 'jsonwebtoken';
-// import { transformSync } from '@babel/core';
 import UserService   from '../services/UserService.js';
 import OrderRepository  from '../repositiories/OrderRepository.js';
 import BasketRepository  from '../repositiories/BasketRepository.js';
 import AddressRepository  from '../repositiories/AddressRepository.js';
+import RestaurantRepository  from '../repositiories/RestaurantRepository.js';
 
 class UserController {
     constructor(pool) {
@@ -16,6 +15,9 @@ class UserController {
         this.getBasket = this.getBasket.bind(this);
         this.addDishInBasket = this.addDishInBasket.bind(this);
         this.deleteDishFromBasket = this.deleteDishFromBasket.bind(this);
+        this.getFavouriteRestaurants = this.getFavouriteRestaurants.bind(this);
+        this.addFavouriteRestaurant = this.addFavouriteRestaurant.bind(this);
+        this.deleteFavouriteRestaurant = this.deleteFavouriteRestaurant.bind(this);
         this.getOrders = this.getOrders.bind(this);
         this.createOrder = this.createOrder.bind(this);
         this.getAddress = this.getAddress.bind(this);
@@ -27,6 +29,7 @@ class UserController {
         this.orderRepository = new OrderRepository(pool);
         this.basketRepository = new BasketRepository(pool);
         this.addressRepository = new AddressRepository(pool);
+        this.restaurantRepository = new RestaurantRepository(pool);
     }
 
     async registration(request, response, next) {
@@ -42,7 +45,7 @@ class UserController {
             const user = await this.userService.registration({
                 name, surname, email, password: hash,
             });
-            if ( user.message ) {
+            if (user.message) {
                 response.send(user.message);
             } else response.send(user);
         } catch (error) {
@@ -56,7 +59,7 @@ class UserController {
 
         try {
             const user = await this.userService.login(email, password);
-            if ( user.message ) {
+            if (user.message) {
                 response.send(user.message);
             } else response.send(user);
         } catch (error) {
@@ -87,7 +90,7 @@ class UserController {
             const updatedUser = await this.userService.update({
                 id, name, surname, password, email, user,
             });
-            if ( updatedUser.message ) {
+            if (updatedUser.message) {
                 response.send(updatedUser.message);
             } else response.send(updatedUser);
         } catch (error) {
@@ -100,7 +103,7 @@ class UserController {
         const { user } = request;
         try {
             const res = await this.userService.delete({ id, user });
-            if ( res.message ) {
+            if (res.message) {
                 response.send(res.message);
             } else response.send(res);
         } catch (error) {
@@ -114,7 +117,7 @@ class UserController {
         try {
             if (user !== undefined && user.id === id) {
                 const basketUser = await this.basketRepository.get(id);
-                if ( basketUser.message ) {
+                if (basketUser.message) {
                     response.send(basketUser.message);
                 } else response.send(basketUser);
             } else {
@@ -131,15 +134,15 @@ class UserController {
         const { user } = request;
         try {
             if (user !== undefined && user.id === id) {
-                const basketUser = await this.basketRepository.addDishInBasket({id, dish_id});
-                if ( basketUser.message ) {
+                const basketUser = await this.basketRepository.addDishInBasket({ id, dish_id });
+                if (basketUser.message) {
                     response.send(basketUser.message);
                 } else response.send(basketUser);
             } else {
                 next(new Error('Invalid user information'));
             }
         } catch (error) {
-            next(new Error('Update basket error'));
+            next(new Error('Add dish in basket error'));
         }
     }
 
@@ -149,15 +152,68 @@ class UserController {
         const { user } = request;
         try {
             if (user !== undefined && user.id === id) {
-                const basketUser = await this.basketRepository.deleteDishFromBasket({id, dish_id});
-                if ( basketUser.message ) {
+                const basketUser = await this.basketRepository.deleteDishFromBasket({ id, dish_id });
+                if (basketUser.message) {
                     response.send(basketUser.message);
                 } else response.send(basketUser);
             } else {
                 next(new Error('Invalid user information'));
             }
         } catch (error) {
-            next(new Error('Update basket error'));
+            next(new Error('Delete dish from basket error'));
+        }
+    }
+
+    async getFavouriteRestaurants(request, response, next) {
+        const { id } = request.params;
+        const { user } = request;
+        try {
+            if (user !== undefined && user.id === id) {
+                const favouriteRestaurantsOfUser = await this.restaurantRepository.getFavoriteOfUser(id);
+                if (favouriteRestaurantsOfUser.message) {
+                    response.send(favouriteRestaurantsOfUser.message);
+                } else response.send(favouriteRestaurantsOfUser);
+            } else {
+                next(new Error('Invalid user information'));
+            }
+        } catch (error) {
+            next(new Error('Get favourite restaurants error'));
+        }
+    }
+
+    async addFavouriteRestaurant(request, response, next) {
+        const { id } = request.params;
+        const { restaurant_id } = request.params;
+        const { user } = request;
+        try {
+            if (user !== undefined && user.id === id) {
+                const restaurant = await this.restaurantRepository.addFavouriteRestaurant({ id, restaurant_id });
+                if (restaurant.message) {
+                    response.send(restaurant.message);
+                } else response.send(restaurant);
+            } else {
+                next(new Error('Invalid user information'));
+            }
+        } catch (error) {
+            next(new Error('Add favourite restaurant error'));
+        }
+    }
+
+    async deleteFavouriteRestaurant(request, response, next) {
+        const { id } = request.params;
+        const { restaurant_id } = request.params;
+        const { user } = request;
+        try {
+            if (user !== undefined && user.id === id) {
+                const restaurant = await this.restaurantRepository.deleteFavouriteRestaurant({ id, restaurant_id });
+                if (restaurant.message) {
+                    response.send(restaurant.message);
+                } else response.send(restaurant);
+            } else {
+                next(new Error('Invalid user information'));
+            }
+        } catch (error) {
+            next(new Error('Delete favourite restaurant error'));
         }
     }
 

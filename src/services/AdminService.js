@@ -42,7 +42,7 @@ class AdminService {
         }
     }
 
-    async login( { nameAdmin, password } ) {
+    async login({ nameAdmin, password }) {
         try {
             const admin = await this.adminRepository.findByNameAdmin({ nameAdmin });
             if (bcrypt.compareSync(password, admin.password) === true) {
@@ -62,7 +62,7 @@ class AdminService {
     }
 
     async update({
-        nameAdmin, password, nameRestaurant, description, id, admin
+        nameAdmin, password, nameRestaurant, description, id, admin,
     }) {
         try {
             if (admin !== undefined && admin.id == id) {
@@ -87,10 +87,10 @@ class AdminService {
     }
 
     async delete({
-        id, admin
+        id, admin,
     }) {
         try {
-            if (admin !== undefined && admin.id == id) { 
+            if (admin !== undefined && admin.id == id) {
                 const restaurant = await this.adminRepository.deleteAdminAndRestaurant(id);
                 return `${restaurant.rows[0].name} deleted`;
             }
@@ -101,11 +101,13 @@ class AdminService {
     }
 
     async createDish({
-        id, description, price, category, admin
+        id, description, price, category, admin,
     }) {
         try {
             if (admin !== undefined && admin.id == id) {
-                const dish = await this.dishRepository.create({ id, description, price, category });
+                const dish = await this.dishRepository.create({
+                    id, description, price, category,
+                });
                 return dish;
             }
             return new Error('Invalid user information');
@@ -139,11 +141,13 @@ class AdminService {
     }
 
     async updateDish({
-        id, description, price, category, dish_id, admin
+        id, description, price, category, dish_id, admin,
     }) {
         try {
             if (admin !== undefined && admin.id == id) {
-                const dish = await this.dishRepository.update({ id, description, price, category, dish_id });
+                const dish = await this.dishRepository.update({
+                    id, description, price, category, dish_id,
+                });
                 return dish;
             }
             return new Error('Invalid user information');

@@ -47,7 +47,7 @@ class BasketRepository {
         }
     }
 
-    async addDishInBasket({id, dish_id}) {
+    async addDishInBasket({ id, dish_id }) {
         try {
             const dish_idRawData = await this._pool.query(
                 'INSERT INTO public."list_of_dishes_basket" (basket_id, dish_id) VALUES ((SELECT id FROM public."baskets" WHERE user_id=$1), $2) RETURNING dish_id;',
@@ -59,7 +59,7 @@ class BasketRepository {
         }
     }
 
-    async deleteDishFromBasket({id, dish_id}) {
+    async deleteDishFromBasket({ id, dish_id }) {
         try {
             const dish_idRawData = await this._pool.query(
                 'DELETE FROM public."list_of_dishes_basket" WHERE dish_id=$2 AND basket_id=(SELECT id FROM public."baskets" WHERE user_id=$1) RETURNING dish_id;',

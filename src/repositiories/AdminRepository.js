@@ -9,7 +9,8 @@ class AdminRepository {
         nameAdmin, nameRestaurant, description, password,
     }) {
         try {
-            let adminRawData, restaurantRawData;
+            let adminRawData; let
+                restaurantRawData;
             await this._pool.query('BEGIN');
             try {
                 restaurantRawData = await this._pool.query(
@@ -47,7 +48,7 @@ class AdminRepository {
                     'UPDATE public."admins" SET name=$1, password=$2 WHERE id=$3 RETURNING *;',
                     [nameAdmin, password, id],
                 );
-                
+
                 restaurantRawData = await this._pool.query(
                     'UPDATE public."restaurants" SET name=$1, description=$2 WHERE id=$3 RETURNING *;',
                     [nameRestaurant, description, adminRawData.rows[0].restaurant_id],
@@ -118,7 +119,7 @@ class AdminRepository {
         }
     }
 
-    async findByNameAdmin( { nameAdmin } ) {
+    async findByNameAdmin({ nameAdmin }) {
         try {
             const adminRawData = await this._pool.query(
                 'SELECT * FROM public."admins" where name=$1;',
@@ -136,7 +137,7 @@ class AdminRepository {
         }
     }
 
-    async findByNameAdminAndRestaurantId( { nameAdmin, restaurantId } ) {
+    async findByNameAdminAndRestaurantId({ nameAdmin, restaurantId }) {
         try {
             const adminRawData = await this._pool.query(
                 'SELECT * FROM public."admins" where name=$1 AND restaurant_id=$2;',

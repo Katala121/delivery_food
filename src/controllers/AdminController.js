@@ -40,7 +40,7 @@ class AdminController {
             const admin = await this.adminService.registration({
                 nameAdmin, password: hash, nameRestaurant, description,
             });
-            if ( admin.message ) {
+            if (admin.message) {
                 next(new Error(admin.message));
             }
             response.send(admin);
@@ -55,22 +55,20 @@ class AdminController {
 
         try {
             const admin = await this.adminService.login({ nameAdmin, password });
-            if ( admin.message ) {
+            if (admin.message) {
                 next(new Error(admin.message));
             }
             response.send(admin);
         } catch (error) {
             next(new Error(error));
         }
-
-
     }
 
     async getRestaurant(request, response, next) {
         try {
             const { id } = request.params;
             const restaurant = await this.restaurantService.get(id);
-            if ( restaurant.message ) {
+            if (restaurant.message) {
                 response.send(restaurant.message);
             } else response.send(restaurant);
         } catch (error) {
@@ -86,27 +84,25 @@ class AdminController {
             const { description } = request.body;
             const { id } = request.params;
             const { admin } = request;
-            const restaurant = await this.adminService.update({ 
-                id, nameAdmin, password, nameRestaurant, description, admin
+            const restaurant = await this.adminService.update({
+                id, nameAdmin, password, nameRestaurant, description, admin,
             });
-            if ( restaurant.message ) {
+            if (restaurant.message) {
                 response.send(restaurant.message);
             } else response.send(restaurant);
         } catch (error) {
             next(new Error(error));
         }
-        
     }
 
     async deleteRestaurant(request, response, next) {
         try {
             const { id } = request.params;
             const { admin } = request;
-            const restaurant = await this.adminService.delete({id, admin});   
-            if ( restaurant.message ) {
+            const restaurant = await this.adminService.delete({ id, admin });
+            if (restaurant.message) {
                 response.send(restaurant.message);
             } else response.send(restaurant);
-            
         } catch (error) {
             next(new Error(error));
         }
@@ -120,9 +116,9 @@ class AdminController {
         const { admin } = request;
         try {
             const dish = await this.adminService.createDish({
-                id, description, price, category, admin
+                id, description, price, category, admin,
             });
-            if ( dish.message ) {
+            if (dish.message) {
                 response.send(dish.message);
             } else response.send(dish);
         } catch (error) {
@@ -135,7 +131,7 @@ class AdminController {
         const { admin } = request;
         try {
             const allDishes = await this.adminService.getAllDishes({ id, admin });
-            if ( allDishes.message ) {
+            if (allDishes.message) {
                 response.send(allDishes.message);
             } else response.send(allDishes);
         } catch (error) {
@@ -149,7 +145,7 @@ class AdminController {
         const { admin } = request;
         try {
             const dish = await this.adminService.getDish({ id, dish_id, admin });
-            if ( dish.message ) {
+            if (dish.message) {
                 response.send(dish.message);
             } else response.send(dish);
         } catch (error) {
@@ -166,9 +162,9 @@ class AdminController {
         const { admin } = request;
         try {
             const dish = await this.adminService.updateDish({
-                id, description, price, category, dish_id, admin
+                id, description, price, category, dish_id, admin,
             });
-            if ( dish.message ) {
+            if (dish.message) {
                 response.send(dish.message);
             } else response.send(dish);
         } catch (error) {
@@ -182,7 +178,7 @@ class AdminController {
         const { admin } = request;
         try {
             const dish = await this.adminService.deleteDish({ id, dish_id, admin });
-            if ( dish.message ) {
+            if (dish.message) {
                 response.send(dish.message);
             } else response.send(dish);
         } catch (error) {

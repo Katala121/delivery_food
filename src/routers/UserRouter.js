@@ -1,8 +1,8 @@
 import express from 'express';
+import multer from 'multer';
 import Auth from '../authentication/Auth.js';
 import UserController from '../controllers/UserController.js';
 import AvatarUpload from '../files/AvatarUpload.js';
-import multer from 'multer';
 
 class UserRouter {
     constructor(pool) {
@@ -30,6 +30,12 @@ class UserRouter {
         this._router.use('/:id/basket/:dish_id', this._auth.checkUser);
         this._router.route('/:id/basket/:dish_id').post(this._userController.addDishInBasket);
         this._router.route('/:id/basket/:dish_id').delete(this._userController.deleteDishFromBasket);
+
+        this._router.use('/:id/favourite_restaurants', this._auth.checkUser);
+        this._router.route('/:id/favourite_restaurants').get(this._userController.getFavouriteRestaurants);
+        this._router.use('/:id/favourite_restaurants/:restaurant_id', this._auth.checkUser);
+        this._router.route('/:id/favourite_restaurants/:restaurant_id').post(this._userController.addFavouriteRestaurant);
+        this._router.route('/:id/favourite_restaurants/:restaurant_id').delete(this._userController.deleteFavouriteRestaurant);
 
         // this._router.use('/:id/orders', this._auth.checkUser);
         this._router.route('/:id/orders').get(this._userController.getOrders);

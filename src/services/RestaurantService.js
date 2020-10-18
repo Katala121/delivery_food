@@ -11,7 +11,7 @@ class RestaurantService {
         this.restaurantRepository = new RestaurantRepository(pool);
     }
 
-    async get (id) {
+    async get(id) {
         try {
             const restarant = await this.restaurantRepository.findByRestaurantId(id);
             return restarant;
