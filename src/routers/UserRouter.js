@@ -41,11 +41,13 @@ class UserRouter {
         this._router.route('/:id/orders').get(this._userController.getOrders);
         this._router.route('/:id/orders').post(this._userController.createOrder);
 
-        // this._router.use('/:id/address', this._auth.checkUser);
-        this._router.route('/:id/address').get(this._userController.getAddress);
+        this._router.use('/:id/address', this._auth.checkUser);
         this._router.route('/:id/address').post(this._userController.createAddress);
-        this._router.route('/:id/address').put(this._userController.updateAddress);
-        this._router.route('/:id/address').delete(this._userController.deleteAddress);
+        this._router.route('/:id/address').get(this._userController.getAllAddresses);
+        this._router.use('/:id/address/:address_id', this._auth.checkUser);
+        this._router.route('/:id/address/:address_id').get(this._userController.getAddress);
+        this._router.route('/:id/address/:address_id').put(this._userController.updateAddress);
+        this._router.route('/:id/address/:address_id').delete(this._userController.deleteAddress);
     }
 
     get router() {

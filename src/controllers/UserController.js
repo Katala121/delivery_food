@@ -21,6 +21,7 @@ class UserController {
         this.getOrders = this.getOrders.bind(this);
         this.createOrder = this.createOrder.bind(this);
         this.getAddress = this.getAddress.bind(this);
+        this.getAllAddresses = this.getAllAddresses.bind(this);
         this.createAddress = this.createAddress.bind(this);
         this.updateAddress = this.updateAddress.bind(this);
         this.deleteAddress = this.deleteAddress.bind(this);
@@ -237,37 +238,96 @@ class UserController {
         }
     }
 
-    async getAddress(request, response, next) {
+    async createAddress(request, response, next) {
+        const { id } = request.params;
+        const { user } = request;
+        const { address_name } = request.body;
+        const { address } = request.body;
         try {
-            const address = await this.addressRepository.get();
-            response.send(address);
+            if (user !== undefined && user.id === id) {
+                const addressUser = await this.addressRepository.create({ id, address_name, address });
+                if (address.message) {
+                    response.send(addressUser.message);
+                } else response.send(addressUser);
+            } else {
+                next(new Error('Invalid user information'));
+            }
+        } catch (error) {
+            next(new Error('Add user address error'));
+        }
+    }
+
+    async getAllAddresses(request, response, next) {
+        const { id } = request.params;
+        const { user } = request;
+        try {
+            if (user !== undefined && user.id === id) {
+                const addressesUser = await this.addressRepository.getAll({ id });
+                if (addressesUser.message) {
+                    response.send(addressesUser.message);
+                } else response.send(addressesUser);
+            } else {
+                next(new Error('Invalid user information'));
+            }
+        } catch (error) {
+            next(new Error('Get all addresses error'));
+        }
+    }
+
+    async getAddress(request, response, next) {
+        const { id } = request.params;
+        const { user } = request;
+        const { address_id } = request.params;
+        try {
+            if (user !== undefined && user.id === id) {
+                const addressUser = await this.addressRepository.get({ id, address_id });
+                if (addressUser.message) {
+                    response.send(addressUser.message);
+                } else response.send(addressUser);
+            } else {
+                next(new Error('Invalid user information'));
+            }
         } catch (error) {
             next(new Error('Get address error'));
         }
     }
 
-    async createAddress(request, response, next) {
-        try {
-            const address = await this.addressRepository.create();
-            response.send(address);
-        } catch (error) {
-            next(new Error('Create address error'));
-        }
-    }
 
     async updateAddress(request, response, next) {
+        const { id } = request.params;
+        const { address_id } = request.params;
+        const { user } = request;
+        const { address_name } = request.body;
+        const { address } = request.body;
         try {
-            const address = await this.addressRepository.update();
-            response.send(address);
+            if (user !== undefined && user.id === id) {
+                const addressUser = await this.addressRepository.update({
+                    id, address_id, address_name, address,
+                });
+                if (addressUser.message) {
+                    response.send(addressUser.message);
+                } else response.send(addressUser);
+            } else {
+                next(new Error('Invalid user information'));
+            }
         } catch (error) {
             next(new Error('Update address error'));
         }
     }
 
     async deleteAddress(request, response, next) {
+        const { id } = request.params;
+        const { user } = request;
+        const { address_id } = request.params;
         try {
-            const address = await this.addressRepository.delete();
-            response.send(address);
+            if (user !== undefined && user.id === id) {
+                const addressUser = await this.addressRepository.delete({ id, address_id });
+                if (addressUser.message) {
+                    response.send(addressUser.message);
+                } else response.send(addressUser);
+            } else {
+                next(new Error('Invalid user information'));
+            }
         } catch (error) {
             next(new Error('Delete address error'));
         }
