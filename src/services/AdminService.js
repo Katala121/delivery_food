@@ -3,6 +3,7 @@ import jwt              from 'jsonwebtoken';
 import AdminRepository from '../repositiories/AdminRepository.js';
 import RestaurantRepository from '../repositiories/RestaurantRepository.js';
 import DishRepository from '../repositiories/DishRepository.js';
+import OrderRepository from '../repositiories/OrderRepository.js';
 
 class AdminService {
     constructor(pool) {
@@ -15,10 +16,14 @@ class AdminService {
         this.getDish = this.getDish.bind(this);
         this.updateDish = this.updateDish.bind(this);
         this.deleteDish = this.deleteDish.bind(this);
+        this.getAllOrders = this.getAllOrders.bind(this);
+        this.getOrder = this.getOrder.bind(this);
+        this.updateOrder = this.updateOrder.bind(this);
 
         this.adminRepository = new AdminRepository(pool);
         this.restaurantRepository = new RestaurantRepository(pool);
         this.dishRepository = new DishRepository(pool);
+        this.orderRepository = new OrderRepository(pool);
     }
 
     async registration({
@@ -80,7 +85,7 @@ class AdminService {
                 });
                 return updatedAdmin;
             }
-            return new Error('Invalid user information');
+            return new Error('Invalid admin information');
         } catch (error) {
             throw Error(error);
         }
@@ -94,7 +99,7 @@ class AdminService {
                 const restaurant = await this.adminRepository.deleteAdminAndRestaurant(id);
                 return `${restaurant.rows[0].name} deleted`;
             }
-            return new Error('Invalid user information');
+            return new Error('Invalid admin information');
         } catch (error) {
             throw Error(error);
         }
@@ -110,7 +115,7 @@ class AdminService {
                 });
                 return dish;
             }
-            return new Error('Invalid user information');
+            return new Error('Invalid admin information');
         } catch (error) {
             throw Error(error);
         }
@@ -122,7 +127,7 @@ class AdminService {
                 const allDishes = await this.dishRepository.findAllByAdminId({ id });
                 return allDishes;
             }
-            return new Error('Invalid user information');
+            return new Error('Invalid admin information');
         } catch (error) {
             throw Error(error);
         }
@@ -134,7 +139,7 @@ class AdminService {
                 const dish = await this.dishRepository.findByDish_Id({ id, dish_id });
                 return dish;
             }
-            return new Error('Invalid user information');
+            return new Error('Invalid admin information');
         } catch (error) {
             throw Error(error);
         }
@@ -150,7 +155,7 @@ class AdminService {
                 });
                 return dish;
             }
-            return new Error('Invalid user information');
+            return new Error('Invalid admin information');
         } catch (error) {
             throw Error(error);
         }
@@ -162,7 +167,45 @@ class AdminService {
                 const dish = await this.dishRepository.delete({ id, dish_id });
                 return `${dish.rows[0].description} deleted`;
             }
-            return new Error('Invalid user information');
+            return new Error('Invalid admin information');
+        } catch (error) {
+            throw Error(error);
+        }
+    }
+
+    async getAllOrders({ id, admin }) {
+        try {
+            if (admin !== undefined && admin.id === +id) {
+                const allOrders = await this.orderRepository.findByAdminId({ id });
+                return allOrders;
+            }
+            return new Error('Invalid admin information');
+        } catch (error) {
+            throw Error(error);
+        }
+    }
+
+    async getOrder({ id, order_id, admin }) {
+        try {
+            if (admin !== undefined && admin.id === +id) {
+                const order = await this.orderRepository.getOrderForAdmin({ id, order_id });
+                return order;
+            }
+            return new Error('Invalid admin information');
+        } catch (error) {
+            throw Error(error);
+        }
+    }
+
+    async updateOrder({
+        id, order_id, status, admin,
+    }) {
+        try {
+            if (admin !== undefined && admin.id === +id) {
+                const order = await this.orderRepository.updateByAdmin({ id, order_id, status });
+                return order;
+            }
+            return new Error('Invalid admin information');
         } catch (error) {
             throw Error(error);
         }

@@ -57,6 +57,47 @@ class RestaurantRepository {
             throw Error(error);
         }
     }
+
+    async getAllRestaurants() {
+        try {
+            const restaurantsRawData = await this._pool.query(
+                'SELECT * FROM public."restaurants";',
+            );
+            return restaurantsRawData.rows;
+        } catch (error) {
+            throw Error(error);
+        }
+    }
+
+    async getRestaurant(id) {
+        try {
+            const restaurantRawData = await this._pool.query(
+                'SELECT * FROM public."restaurants" WHERE id=$1;',
+                [id],
+            );
+            if (restaurantRawData.rows.length === 0) {
+                return new Error('Invalid restaurant information');
+            }
+            return restaurantRawData.rows[0];
+        } catch (error) {
+            throw Error(error);
+        }
+    }
+
+    async getMenu(id) {
+        try {
+            const menuRawData = await this._pool.query(
+                'SELECT * FROM public."dishes" WHERE restaurant_id=$1;',
+                [id],
+            );
+            if (menuRawData.rows.length === 0) {
+                return new Error('Invalid restaurant information');
+            }
+            return menuRawData.rows;
+        } catch (error) {
+            throw Error(error);
+        }
+    }
 }
 
 export default RestaurantRepository;

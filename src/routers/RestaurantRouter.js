@@ -2,10 +2,10 @@ import express from 'express';
 import RestaurantController from '../controllers/RestaurantController.js';
 
 class RestaurantRouter  {
-    constructor() {
+    constructor(pool) {
         this._router = express.Router();
 
-        this._restaurantController = new RestaurantController();
+        this._restaurantController = new RestaurantController(pool);
 
         this._router.route('/').get(this._restaurantController.getRestaurants);
         this._router.route('/:id').get(this._restaurantController.getRestaurant);

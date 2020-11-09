@@ -1,5 +1,4 @@
 import bcrypt           from 'bcryptjs';
-// import jwt              from 'jsonwebtoken';
 import OrderRepository  from '../repositiories/OrderRepository.js';
 import AdminRepository  from '../repositiories/AdminRepository.js';
 import AdminService  from '../services/AdminService.js';
@@ -12,9 +11,9 @@ class AdminController {
         this.getRestaurant = this.getRestaurant.bind(this);
         this.updateRestaurant = this.updateRestaurant.bind(this);
         this.deleteRestaurant = this.deleteRestaurant.bind(this);
+        this.getAllOrders = this.getAllOrders.bind(this);
         this.getOrder = this.getOrder.bind(this);
         this.updateOrder = this.updateOrder.bind(this);
-        this.deleteOrder = this.deleteOrder.bind(this);
         this.createDish = this.createDish.bind(this);
         this.getAllDishes = this.getAllDishes.bind(this);
         this.getDish = this.getDish.bind(this);
@@ -186,22 +185,48 @@ class AdminController {
         }
     }
 
-    async getOrder(request, response) {
-        const order = await this.orderRepository.get();
+    async getAllOrders(request, response, next) {
+        const { id } = request.params;
+        const { admin } = request;
+        try {
+            const orders = await this.adminService.getAllOrders({ id, admin });
+            if (orders.message) {
+                response.send(orders.message);
+            } else response.send(orders);
+        } catch (error) {
+            next(new Error(error));
+        }
+    }
 
-        response.send(order);
+    async getOrder(request, response, next) {
+        const { id } = request.params;
+        const { order_id } = request.params;
+        const { admin } = request;
+        try {
+            const order = await this.adminService.getOrder({ id, order_id, admin });
+            if (order.message) {
+                response.send(order.message);
+            } else response.send(order);
+        } catch (error) {
+            next(new Error(error));
+        }
     }
 
     async updateOrder(request, response) {
-        const order = await this.orderRepository.update();
-
-        response.send(order);
-    }
-
-    async deleteOrder(request, response) {
-        const order = await this.orderRepository.delete();
-
-        response.send(order);
+        const { id } = request.params;
+        const { order_id } = request.params;
+        const { status } = request.body;
+        const { admin } = request;
+        try {
+            const order = await this.adminService.updateOrder({
+                id, order_id, status, admin,
+            });
+            if (order.message) {
+                response.send(order.message);
+            } else response.send(order);
+        } catch (error) {
+            next(new Error(error));
+        }
     }
 }
 

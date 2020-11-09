@@ -13,7 +13,7 @@ const server = app.listen(PORT, async () => {
     console.log(`Server started on port ${server.address().port}`);
 
     await pool.connect();
-    
+
 
     app.use(express.json());
 
@@ -30,5 +30,5 @@ const server = app.listen(PORT, async () => {
         console.log(error.stack);
         console.log(error.message);
         response.status(500).send(error.message);
-    })
+    });
 });

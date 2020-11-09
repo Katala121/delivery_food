@@ -85,8 +85,10 @@ class UserRepository {
         id, name, surname, password, email,
     }) {
         try {
-            const userRawData = await this._pool.query('UPDATE public."users" SET name=$2, surname=$3, password=$4, email=$5 WHERE id=$1 RETURNING *;',
-                [id, name, surname, password, email]);
+            const userRawData = await this._pool.query(
+                'UPDATE public."users" SET name=$2, surname=$3, password=$4, email=$5 WHERE id=$1 RETURNING *;',
+                [id, name, surname, password, email],
+            );
 
             return new User({
                 id: userRawData.rows[0].id,
