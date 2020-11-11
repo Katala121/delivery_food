@@ -4,6 +4,7 @@ import AdminRepository from '../repositiories/AdminRepository.js';
 import RestaurantRepository from '../repositiories/RestaurantRepository.js';
 import DishRepository from '../repositiories/DishRepository.js';
 import OrderRepository from '../repositiories/OrderRepository.js';
+import ReviewRepository from '../repositiories/ReviewRepository.js';
 
 class AdminService {
     constructor(pool) {
@@ -19,11 +20,13 @@ class AdminService {
         this.getAllOrders = this.getAllOrders.bind(this);
         this.getOrder = this.getOrder.bind(this);
         this.updateOrder = this.updateOrder.bind(this);
+        this.getAllReviews = this.getAllReviews.bind(this);
 
         this.adminRepository = new AdminRepository(pool);
         this.restaurantRepository = new RestaurantRepository(pool);
         this.dishRepository = new DishRepository(pool);
         this.orderRepository = new OrderRepository(pool);
+        this.reviewRepository = new ReviewRepository(pool);
     }
 
     async registration({
@@ -204,6 +207,18 @@ class AdminService {
             if (admin !== undefined && admin.id === +id) {
                 const order = await this.orderRepository.updateByAdmin({ id, order_id, status });
                 return order;
+            }
+            return new Error('Invalid admin information');
+        } catch (error) {
+            throw Error(error);
+        }
+    }
+
+    async getAllReviews({ id, admin }) {
+        try {
+            if (admin !== undefined && admin.id === +id) {
+                const allReviews = await this.reviewRepository.findByAdminId({ id });
+                return allReviews;
             }
             return new Error('Invalid admin information');
         } catch (error) {

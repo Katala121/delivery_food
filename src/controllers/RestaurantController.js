@@ -37,13 +37,19 @@ class RestaurantController {
         }
     }
 
-    async getReviews(request, response) {
-        const reviews = await this.reviewRepository.get();
-
-        response.send(reviews);
+    async getReviews(request, response, next) {
+        const { id } = request.params;
+        try {
+            const reviews = await this.reviewRepository.findByRestaurantId({ id });
+            if (reviews.message) {
+                response.send(reviews.message);
+            } else response.send(reviews);
+        } catch (error) {
+            next(new Error('Get menu error'));
+        }
     }
 
-    async getMenu(request, response) {
+    async getMenu(request, response, next) {
         const { id } = request.params;
         try {
             const menu = await this.restaurantRepository.getMenu(id);

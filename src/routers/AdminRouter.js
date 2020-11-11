@@ -26,6 +26,8 @@ class AdminRouter  {
         this._router.route('/:id/orders').get(this._adminController.getAllOrders);
         this._router.route('/:id/orders/:order_id').get(this._adminController.getOrder);
         this._router.route('/:id/orders/:order_id').put(this._adminController.updateOrder);
+
+        this._router.route('/:id/reviews').get(this._adminController.getAllReviews);
     }
 
     get router() {

@@ -19,6 +19,7 @@ class AdminController {
         this.getDish = this.getDish.bind(this);
         this.updateDish = this.updateDish.bind(this);
         this.deleteDish = this.deleteDish.bind(this);
+        this.getAllReviews = this.getAllReviews.bind(this);
 
         this.adminService = new AdminService(pool);
         this.orderRepository = new OrderRepository(pool);
@@ -224,6 +225,19 @@ class AdminController {
             if (order.message) {
                 response.send(order.message);
             } else response.send(order);
+        } catch (error) {
+            next(new Error(error));
+        }
+    }
+
+    async getAllReviews(request, response, next) {
+        const { id } = request.params;
+        const { admin } = request;
+        try {
+            const reviews = await this.adminService.getAllReviews({ id, admin });
+            if (reviews.message) {
+                response.send(reviews.message);
+            } else response.send(reviews);
         } catch (error) {
             next(new Error(error));
         }

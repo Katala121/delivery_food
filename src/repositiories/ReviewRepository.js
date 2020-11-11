@@ -46,8 +46,34 @@ class ReviewRepository {
         }
     }
 
-    async findByRestaurantId() {
-        return 'review';
+    async findByRestaurantId({ id }) {
+        try {
+            const reviewRawData = await this._pool.query(
+                'SELECT * FROM public."reviews" WHERE restaurant_id=$1;',
+                [id],
+            );
+            if (reviewRawData.rows.length === 0) {
+                return new Error('Restaurant haven`t reviews');
+            }
+            return reviewRawData.rows;
+        } catch (error) {
+            throw Error(error);
+        }
+    }
+
+    async findByAdminId({ id }) {
+        try {
+            const reviewRawData = await this._pool.query(
+                'SELECT * FROM public."reviews" WHERE restaurant_id=(SELECT restaurant_id FROM public."admins" WHERE id=$1);',
+                [id],
+            );
+            if (reviewRawData.rows.length === 0) {
+                return new Error('Restaurant haven`t reviews');
+            }
+            return reviewRawData.rows;
+        } catch (error) {
+            throw Error(error);
+        }
     }
 
     async delete({ restaurant_id, review_id }) {
