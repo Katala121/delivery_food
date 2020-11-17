@@ -16,12 +16,14 @@ class UserRepository {
                     'INSERT INTO public."users" (email, name, surname, password) VALUES ($1, $2, $3, $4) RETURNING *;',
                     [email, name, surname, password],
                 );
+                console.log(userRawData);
                 await this._pool.query(
                     'INSERT INTO public."baskets" (user_id) VALUES ($1) RETURNING id;',
                     [userRawData.rows[0].id],
                 );
                 await this._pool.query('COMMIT');
             } catch (error) {
+                console.log(error);
                 this._pool.query('ROLLBACK');
             }
             return new User({
@@ -83,8 +85,10 @@ class UserRepository {
         id, name, surname, password, email,
     }) {
         try {
-            const userRawData = await this._pool.query('UPDATE public."users" SET name=$2, surname=$3, password=$4, email=$5 WHERE id=$1 RETURNING *;',
-                [id, name, surname, password, email]);
+            const userRawData = await this._pool.query(
+                'UPDATE public."users" SET name=$2, surname=$3, password=$4, email=$5 WHERE id=$1 RETURNING *;',
+                [id, name, surname, password, email],
+            );
 
             return new User({
                 id: userRawData.rows[0].id,

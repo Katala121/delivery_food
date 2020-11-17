@@ -1,5 +1,7 @@
 class Dish {
-    constructor(id, description, price, category, photo_link, restaurant_id) {
+    constructor({
+        id, description, price, category, photo_link, restaurant_id,
+    }) {
         this._id = id;
         this._description = description;
         this._price = price;

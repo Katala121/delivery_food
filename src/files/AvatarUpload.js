@@ -2,6 +2,11 @@ import multer from 'multer';
 // import sharp from 'sharp';
 
 class AvatarUpload {
+    constructor() {
+        this.storage = this.storage.bind(this);
+        this.upload = this.upload.bind(this);
+    }
+
     storage() {
         multer.diskStorage({
             destination(req, file, cb) {
@@ -14,7 +19,7 @@ class AvatarUpload {
     }
 
     upload() {
-        multer({ storage: this.storage }).single('avatar');
+        multer({ storage: this.storage() }).single('avatar');
     }
 }
 

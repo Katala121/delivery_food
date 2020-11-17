@@ -1,58 +1,22 @@
 import bcrypt           from 'bcryptjs';
 import jwt              from 'jsonwebtoken';
-import UserRepository   from '../repositiories/UserRepository.js';
-import BasketRepository  from '../repositiories/BasketRepository.js';
+import RestaurantRepository   from '../repositiories/RestaurantRepository.js';
 
-class UserService {
+class RestaurantService {
     constructor(pool) {
-        this.registration = this.registration.bind(this);
-        this.login = this.login.bind(this);
+        this.get = this.get.bind(this);
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
 
-        this.userRepository = new UserRepository(pool);
-        this.basketRepository = new BasketRepository(pool);
+        this.restaurantRepository = new RestaurantRepository(pool);
     }
 
-    async registration({
-        name, surname, email, password,
-    }) {
+    async get(id) {
         try {
-            const user = await this.userRepository.createUserAndBasket({
-                name, surname, email, password,
-            });
-            console.log(user);
-
-            user._token = jwt.sign({
-                email: user.email,
-                name: user.name,
-                id: user.id,
-            }, password, {
-                expiresIn: '24h',
-            });
-            return user;
+            const restarant = await this.restaurantRepository.findByRestaurantId(id);
+            return restarant;
         } catch (error) {
             throw Error(error);
-        }
-    }
-
-    async login(email, password) {
-        try {
-            const user = await this.userRepository.findByEmail(email);
-
-            if (bcrypt.compareSync(password, user.password) === true) {
-                user._token = jwt.sign({
-                    email: user.email,
-                    name: user.name,
-                    id: user.id,
-                }, user.password, {
-                    expiresIn: '24h',
-                });
-                return user;
-            }
-            return new Error('Invalid password');
-        } catch (error) {
-            throw Error(error.massage);
         }
     }
 
@@ -94,4 +58,4 @@ class UserService {
     }
 }
 
-export default UserService;
+export default RestaurantService;
