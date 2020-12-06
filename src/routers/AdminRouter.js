@@ -1,5 +1,5 @@
 import express from 'express';
-import Auth from '../authentication/Auth.js';
+import Auth from '../middleware/Auth.js';
 import AdminController from '../controllers/AdminController.js';
 
 class AdminRouter  {

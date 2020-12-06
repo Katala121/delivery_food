@@ -126,6 +126,18 @@ class UserRepository {
             throw Error(error);
         }
     }
+
+    async avatarUpload({ id, fileSrc }) {
+        try {
+            const userRawData = await this._pool.query(
+                'UPDATE public."users" SET photo_link=$2 WHERE id=$1 RETURNING *;',
+                [id, fileSrc],
+            );
+            return userRawData.rows[0].photo_link;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
 }
 
 export default UserRepository;

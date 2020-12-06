@@ -32,6 +32,7 @@ class UserController {
         this.getReview = this.getReview.bind(this);
         this.updateReview = this.updateReview.bind(this);
         this.deleteReview = this.deleteReview.bind(this);
+        this.avatarUpload = this.avatarUpload.bind(this);
 
         this.userService = new UserService(pool);
         this.orderRepository = new OrderRepository(pool);
@@ -493,6 +494,28 @@ class UserController {
             }
         } catch (error) {
             next(new Error('Delete review error'));
+        }
+    }
+
+    async avatarUpload(request, response, next) {
+        const { id } = request.params;
+        const { user } = request;
+        const fileSrc = request.file.path;
+
+        try {
+            if (user !== undefined && user.id === id) {
+                if (request.file === undefined) {
+                    response.send('File wasn\'t recieve!');
+                }
+                const avatarSrc = await this.userService.avatarUpload({ id, fileSrc });
+                if (avatarSrc.message) {
+                    response.send(avatarSrc.message);
+                } else response.send(avatarSrc);
+            } else {
+                next(new Error('Invalid user information'));
+            }
+        } catch (error) {
+            next(new Error('Upload error!'));
         }
     }
 }

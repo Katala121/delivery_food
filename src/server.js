@@ -3,7 +3,7 @@ import process          from 'process';
 import UserRouter       from './routers/UserRouter.js';
 import AdminRouter      from './routers/AdminRouter.js';
 import RestaurantRouter from './routers/RestaurantRouter.js';
-import pool           from './database.js';
+import pool             from './database.js';
 
 const app = express();
 
@@ -13,7 +13,6 @@ const server = app.listen(PORT, async () => {
     console.log(`Server started on port ${server.address().port}`);
 
     await pool.connect();
-
 
     app.use(express.json());
 
