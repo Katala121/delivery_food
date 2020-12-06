@@ -500,13 +500,13 @@ class UserController {
     async avatarUpload(request, response, next) {
         const { id } = request.params;
         const { user } = request;
-        const fileSrc = request.file.path;
 
         try {
             if (user !== undefined && user.id === id) {
                 if (request.file === undefined) {
                     response.send('File wasn\'t recieve!');
                 }
+                const fileSrc = request.file.path;
                 const avatarSrc = await this.userService.avatarUpload({ id, fileSrc });
                 if (avatarSrc.message) {
                     response.send(avatarSrc.message);

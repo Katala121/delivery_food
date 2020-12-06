@@ -2,7 +2,7 @@ import express from 'express';
 // import multer from 'multer';
 import Auth from '../middleware/Auth.js';
 import UserController from '../controllers/UserController.js';
-import avatarUpload from '../middleware/AvatarUpload.js';
+import avatarUpload from '../middleware/FileUpload.js';
 
 class UserRouter {
     constructor(pool) {

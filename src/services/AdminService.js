@@ -21,6 +21,7 @@ class AdminService {
         this.getOrder = this.getOrder.bind(this);
         this.updateOrder = this.updateOrder.bind(this);
         this.getAllReviews = this.getAllReviews.bind(this);
+        this.fileUpload = this.fileUpload.bind(this);
 
         this.adminRepository = new AdminRepository(pool);
         this.restaurantRepository = new RestaurantRepository(pool);
@@ -219,6 +220,20 @@ class AdminService {
             if (admin !== undefined && admin.id === +id) {
                 const allReviews = await this.reviewRepository.findByAdminId({ id });
                 return allReviews;
+            }
+            return new Error('Invalid admin information');
+        } catch (error) {
+            throw Error(error);
+        }
+    }
+
+    async fileUpload({
+        id, dish_id, admin, fileSrc,
+    }) {
+        try {
+            if (admin !== undefined && admin.id === +id) {
+                const photoSrc = await this.dishRepository.fileUpload({ id, dish_id, fileSrc });
+                return photoSrc;
             }
             return new Error('Invalid admin information');
         } catch (error) {

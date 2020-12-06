@@ -7,13 +7,14 @@ const storage = multer.diskStorage({
         cb(null, 'src/files/');
     },
     filename(req, file, cb) {
-        const fileName = `${moment().format('DD_MM_YYYY_HH-mm')}_id${req.user.id}.${file.mimetype.split('/')[1]}`;
+        const id = req.user ? req.user.id : req.params.dish_id;
+        const fileName = `${moment().format('DD_MM_YYYY_HH-mm')}_id${id}.${file.mimetype.split('/')[1]}`;
         cb(null, fileName);
     },
 });
 
 const fileFilter = (req, file, cb) => {
-    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
+    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpeg' || file.mimetype === 'image/gif') {
         cb(null, true);
     } else {
         cb(new Error('Invalid format file'));

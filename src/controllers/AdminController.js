@@ -20,6 +20,7 @@ class AdminController {
         this.updateDish = this.updateDish.bind(this);
         this.deleteDish = this.deleteDish.bind(this);
         this.getAllReviews = this.getAllReviews.bind(this);
+        this.fileUpload = this.fileUpload.bind(this);
 
         this.adminService = new AdminService(pool);
         this.orderRepository = new OrderRepository(pool);
@@ -238,6 +239,26 @@ class AdminController {
             if (reviews.message) {
                 response.send(reviews.message);
             } else response.send(reviews);
+        } catch (error) {
+            next(new Error(error));
+        }
+    }
+
+    async fileUpload(request, response, next) {
+        const { id } = request.params;
+        const { dish_id } = request.params;
+        const { admin } = request;
+        try {
+            if (request.file === undefined) {
+                response.send('File wasn\'t recieve!');
+            }
+            const fileSrc = request.file.path;
+            const photoSrc = await this.adminService.fileUpload({
+                id, dish_id, admin, fileSrc,
+            });
+            if (photoSrc.message) {
+                response.send(photoSrc.message);
+            } else response.send(photoSrc);
         } catch (error) {
             next(new Error(error));
         }

@@ -116,7 +116,7 @@ class DishRepository {
     async delete({ id, dish_id }) {
         try {
             const dish = await this._pool.query(
-                'DELETE FROM public."dishes" WHERE id=$1 and restaurant_id=(SELECT restaurant_id FROM public."admins" where id=$2) RETURNING description;',
+                'DELETE FROM public."dishes" WHERE id=$1 AND restaurant_id=(SELECT restaurant_id FROM public."admins" where id=$2) RETURNING description;',
                 [dish_id, id],
             );
             if (dish.rows.length === 0) {
@@ -125,6 +125,18 @@ class DishRepository {
             return dish;
         } catch (error) {
             throw Error(error);
+        }
+    }
+
+    async fileUpload({ id, dish_id, fileSrc }) {
+        try {
+            const dishRawData = await this._pool.query(
+                'UPDATE public."dishes" SET photo_link=$3 WHERE id=$2 AND restaurant_id=(SELECT restaurant_id FROM public."admins" where id=$1) RETURNING *;',
+                [id, dish_id, fileSrc],
+            );
+            return dishRawData.rows[0].photo_link;
+        } catch (error) {
+            throw new Error(error);
         }
     }
 }
