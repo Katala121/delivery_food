@@ -75,7 +75,7 @@ class AdminService {
         try {
             if (admin !== undefined && admin.id === +id) {
                 const restarant = await this.adminRepository.get(id);
-                return restarant;    
+                return restarant;
             }
             return new Error('Invalid admin information');
         } catch (error) {

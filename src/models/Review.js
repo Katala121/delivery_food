@@ -1,5 +1,7 @@
 class Review {
-    constructor({ id, restaurant_id, review, rating }) {
+    constructor({
+        id, restaurant_id, review, rating,
+    }) {
         this._id = id;
         this._restaurant_id = restaurant_id;
         this._review = review;

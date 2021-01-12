@@ -21,7 +21,7 @@ class ReviewRepository {
     }
 
     async create({
-        id, restaurant_id, review, rating
+        id, restaurant_id, review, rating,
     }) {
         try {
             let reviewRawData;
@@ -33,9 +33,9 @@ class ReviewRepository {
                 );
                 const ratings = await this._pool.query(
                     'SELECT rating FROM public."reviews" WHERE restaurant_id=$1;',
-                    [restaurant_id]
+                    [restaurant_id],
                 );
-                let ratingSum = ratings.rows.reduce((sum, row) => sum + row.rating, 0);
+                const ratingSum = ratings.rows.reduce((sum, row) => sum + row.rating, 0);
                 const ratingRestaurant = ratingSum / ratings.rows.length;
                 await this._pool.query(
                     'UPDATE public."restaurants" SET rating=$1 WHERE id=$2;',
@@ -102,7 +102,9 @@ class ReviewRepository {
         }
     }
 
-    async update({ restaurant_id, review, review_id, rating }) {
+    async update({
+        restaurant_id, review, review_id, rating,
+    }) {
         try {
             let reviewRawData;
             await this._pool.query('BEGIN');
@@ -113,9 +115,9 @@ class ReviewRepository {
                 );
                 const ratings = await this._pool.query(
                     'SELECT rating FROM public."reviews" WHERE restaurant_id=$1;',
-                    [restaurant_id]
+                    [restaurant_id],
                 );
-                let ratingSum = ratings.rows.reduce((sum, row) => sum + row.rating, 0);
+                const ratingSum = ratings.rows.reduce((sum, row) => sum + row.rating, 0);
                 const ratingRestaurant = ratingSum / ratings.rows.length;
                 await this._pool.query(
                     'UPDATE public."restaurants" SET rating=$1 WHERE id=$2;',

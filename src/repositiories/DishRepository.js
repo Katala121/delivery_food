@@ -39,7 +39,7 @@ class DishRepository {
                 category: categoryRawData.rows[0].category,
             });
         } catch (error) {
-                throw Error(error);
+            throw Error(error);
         }
     }
 

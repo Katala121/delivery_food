@@ -420,7 +420,7 @@ class UserController {
         try {
             if (user !== undefined && user.id === id) {
                 const reviewOfRestaurant = await this.reviewRepository.create({
-                    id, restaurant_id, review, rating
+                    id, restaurant_id, review, rating,
                 });
                 if (reviewOfRestaurant.message) {
                     response.send(reviewOfRestaurant.message);
@@ -482,7 +482,7 @@ class UserController {
         try {
             if (user !== undefined && user.id === id) {
                 const reviewOfRestaurant = await this.reviewRepository.update({
-                    restaurant_id, review, review_id, rating
+                    restaurant_id, review, review_id, rating,
                 });
                 if (reviewOfRestaurant.message) {
                     response.send(reviewOfRestaurant.message);
