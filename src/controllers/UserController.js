@@ -29,6 +29,7 @@ class UserController {
         this.updateAddress = this.updateAddress.bind(this);
         this.deleteAddress = this.deleteAddress.bind(this);
         this.createReview = this.createReview.bind(this);
+        this.getReviews = this.getReviews.bind(this);
         this.getReview = this.getReview.bind(this);
         this.updateReview = this.updateReview.bind(this);
         this.deleteReview = this.deleteReview.bind(this);
@@ -253,13 +254,12 @@ class UserController {
         const { delivery_address_id } = request.body;
         const { order_cost } = request.body;
         const { restaurant_id } = request.body;
-        const { order_time } = request.body;
         const { dishes_list } = request.body;
         const { user } = request;
         try {
             if (user !== undefined && user.id === id) {
                 const order = await this.orderRepository.create({
-                    user_id: id, delivery_address_id, order_cost, restaurant_id, order_time, dishes_list,
+                    user_id: id, delivery_address_id, order_cost, restaurant_id, dishes_list,
                 });
                 if (order.message) {
                     response.send(order.message);
@@ -298,13 +298,12 @@ class UserController {
         const { delivery_address_id } = request.body;
         const { order_cost } = request.body;
         const { restaurant_id } = request.body;
-        const { order_time } = request.body;
         const { dishes_list } = request.body;
         const { user } = request;
         try {
             if (user !== undefined && user.id === id) {
                 const order = await this.orderRepository.update({
-                    user_id: id, delivery_address_id, order_cost, restaurant_id, order_time, dishes_list, order_id,
+                    user_id: id, delivery_address_id, order_cost, restaurant_id, dishes_list, order_id,
                 });
                 if (order.message) {
                     response.send(order.message);
@@ -417,10 +416,11 @@ class UserController {
         const { restaurant_id } = request.params;
         const { user } = request;
         const { review } = request.body;
+        const { rating } = request.body;
         try {
             if (user !== undefined && user.id === id) {
                 const reviewOfRestaurant = await this.reviewRepository.create({
-                    restaurant_id, review,
+                    id, restaurant_id, review, rating
                 });
                 if (reviewOfRestaurant.message) {
                     response.send(reviewOfRestaurant.message);
@@ -430,6 +430,24 @@ class UserController {
             }
         } catch (error) {
             next(new Error('Add review error'));
+        }
+    }
+
+    async getReviews(request, response, next) {
+        const { id } = request.params;
+        const { restaurant_id } = request.params;
+        const { user } = request;
+        try {
+            if (user !== undefined && user.id === id) {
+                const reviews = await this.reviewRepository.findByRestaurantId({ restaurant_id });
+                if (reviews.message) {
+                    response.send(reviews.message);
+                } else response.send(reviews);
+            } else {
+                next(new Error('Invalid user information'));
+            }
+        } catch (error) {
+            next(new Error('Get reviews error'));
         }
     }
 
@@ -459,11 +477,12 @@ class UserController {
         const { restaurant_id } = request.params;
         const { user } = request;
         const { review } = request.body;
+        const { rating } = request.body;
         const { review_id } = request.params;
         try {
             if (user !== undefined && user.id === id) {
                 const reviewOfRestaurant = await this.reviewRepository.update({
-                    restaurant_id, review, review_id,
+                    restaurant_id, review, review_id, rating
                 });
                 if (reviewOfRestaurant.message) {
                     response.send(reviewOfRestaurant.message);

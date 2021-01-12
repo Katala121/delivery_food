@@ -12,11 +12,17 @@ class UserRepository {
             let userRawData;
             await this._pool.query('BEGIN');
             try {
+                const isUser = await this._pool.query(
+                    'SELECT * FROM public."users" where email=$1;',
+                    [email],
+                );
+                if (isUser.rows.length) {
+                    return new Error('A user with this email address already exists');
+                }
                 userRawData = await this._pool.query(
                     'INSERT INTO public."users" (email, name, surname, password) VALUES ($1, $2, $3, $4) RETURNING *;',
                     [email, name, surname, password],
                 );
-                console.log(userRawData);
                 await this._pool.query(
                     'INSERT INTO public."baskets" (user_id) VALUES ($1) RETURNING id;',
                     [userRawData.rows[0].id],
@@ -71,7 +77,7 @@ class UserRepository {
                 name: userRawData.rows[0].name,
                 surname: userRawData.rows[0].surname,
                 email: userRawData.rows[0].email,
-                photo: userRawData.rows[0].photo,
+                photo_link: userRawData.rows[0].photo_link,
             });
             user._password = userRawData.rows[0].password;
 
@@ -95,6 +101,7 @@ class UserRepository {
                 name: userRawData.rows[0].name,
                 surname: userRawData.rows[0].surname,
                 email: userRawData.rows[0].email,
+                photo_link: userRawData.rows[0].photo_link,
             });
         } catch (error) {
             throw new Error(error);

@@ -10,6 +10,7 @@ class AdminService {
     constructor(pool) {
         this.registration = this.registration.bind(this);
         this.login = this.login.bind(this);
+        this.get = this.get.bind(this);
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
         this.createDish = this.createDish.bind(this);
@@ -70,6 +71,18 @@ class AdminService {
         }
     }
 
+    async get({ id, admin }) {
+        try {
+            if (admin !== undefined && admin.id === +id) {
+                const restarant = await this.adminRepository.get(id);
+                return restarant;    
+            }
+            return new Error('Invalid admin information');
+        } catch (error) {
+            throw Error(error);
+        }
+    }
+
     async update({
         nameAdmin, password, nameRestaurant, description, id, admin,
     }) {
@@ -110,12 +123,12 @@ class AdminService {
     }
 
     async createDish({
-        id, description, price, category, admin,
+        id, title, description, price, category, admin,
     }) {
         try {
             if (admin !== undefined && admin.id === +id) {
                 const dish = await this.dishRepository.create({
-                    id, description, price, category,
+                    id, title, description, price, category,
                 });
                 return dish;
             }
@@ -150,12 +163,12 @@ class AdminService {
     }
 
     async updateDish({
-        id, description, price, category, dish_id, admin,
+        id, title, description, price, category, dish_id, admin,
     }) {
         try {
             if (admin !== undefined && admin.id === +id) {
                 const dish = await this.dishRepository.update({
-                    id, description, price, category, dish_id,
+                    id, title, description, price, category, dish_id,
                 });
                 return dish;
             }
@@ -169,7 +182,7 @@ class AdminService {
         try {
             if (admin !== undefined && admin.id === +id) {
                 const dish = await this.dishRepository.delete({ id, dish_id });
-                return `${dish.rows[0].description} deleted`;
+                return `${dish.rows[0].title} deleted`;
             }
             return new Error('Invalid admin information');
         } catch (error) {

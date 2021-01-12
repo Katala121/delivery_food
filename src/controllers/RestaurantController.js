@@ -40,7 +40,7 @@ class RestaurantController {
     async getReviews(request, response, next) {
         const { id } = request.params;
         try {
-            const reviews = await this.reviewRepository.findByRestaurantId({ id });
+            const reviews = await this.reviewRepository.findByRestaurantId({ restaurant_id: id });
             if (reviews.message) {
                 response.send(reviews.message);
             } else response.send(reviews);

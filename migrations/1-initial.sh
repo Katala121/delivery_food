@@ -84,7 +84,7 @@ create table if not exists public."reviews"
 	review text not null,
 	restaurant_id int references restaurants,
 	user_id bigint references users,
-	rating smallint
+	rating real
 );
 
 ALTER TABLE public."reviews" OWNER TO postgres;
@@ -109,7 +109,7 @@ create table if not exists public."orders"
 	order_cost money DEFAULT 0,
 	restaurant_id int references restaurants not null,
 	order_time timestamptz not null,
-	status_id order_status DEFAULT 'new'
+	status order_status DEFAULT 'new'
 );
 
 ALTER TABLE public."orders" OWNER TO postgres;

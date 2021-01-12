@@ -1,8 +1,9 @@
 class Dish {
     constructor({
-        id, description, price, category, photo_link, restaurant_id,
+        id, title, description, price, category, photo_link, restaurant_id,
     }) {
         this._id = id;
+        this._title = title;
         this._description = description;
         this._price = price;
         this._category = category;
@@ -12,6 +13,14 @@ class Dish {
 
     get id() {
         return this._id;
+    }
+
+    get title() {
+        return this._title;
+    }
+
+    set title(newValue) {
+        this._title = newValue;
     }
 
     get description() {
@@ -53,6 +62,7 @@ class Dish {
     toJSON() {
         return {
             id: this.id,
+            title: this.title,
             description: this.description,
             price: this.price,
             category: this.category,

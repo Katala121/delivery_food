@@ -68,7 +68,8 @@ class AdminController {
     async getRestaurant(request, response, next) {
         try {
             const { id } = request.params;
-            const restaurant = await this.restaurantService.get(id);
+            const { admin } = request;
+            const restaurant = await this.adminService.get({ id, admin });
             if (restaurant.message) {
                 response.send(restaurant.message);
             } else response.send(restaurant);
@@ -111,13 +112,14 @@ class AdminController {
 
     async createDish(request, response, next) {
         const { id } = request.params;
+        const { title } = request.body;
         const { description } = request.body;
         const { price } = request.body;
         const { category } = request.body;
         const { admin } = request;
         try {
             const dish = await this.adminService.createDish({
-                id, description, price, category, admin,
+                id, title, description, price, category, admin,
             });
             if (dish.message) {
                 response.send(dish.message);
@@ -157,13 +159,14 @@ class AdminController {
     async updateDish(request, response, next) {
         const { id } = request.params;
         const { dish_id } = request.params;
+        const { title } = request.body;
         const { description } = request.body;
         const { price } = request.body;
         const { category } = request.body;
         const { admin } = request;
         try {
             const dish = await this.adminService.updateDish({
-                id, description, price, category, dish_id, admin,
+                id, title, description, price, category, dish_id, admin,
             });
             if (dish.message) {
                 response.send(dish.message);
