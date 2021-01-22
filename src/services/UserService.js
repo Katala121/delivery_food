@@ -9,6 +9,7 @@ class UserService {
         this.login = this.login.bind(this);
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
+        this.avatarUpload = this.avatarUpload.bind(this);
 
         this.userRepository = new UserRepository(pool);
         this.basketRepository = new BasketRepository(pool);
@@ -88,6 +89,15 @@ class UserService {
                 return `${user.name} deleted`;
             }
             return new Error('Invalid user information');
+        } catch (error) {
+            throw Error(error);
+        }
+    }
+
+    async avatarUpload({ id, fileSrc }) {
+        try {
+            const avaterSrc = await this.userRepository.avatarUpload({ id, fileSrc });
+            return avaterSrc;
         } catch (error) {
             throw Error(error);
         }

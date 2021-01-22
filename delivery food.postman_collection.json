@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8fa58628-aaae-4bb0-b5c0-41975be9cd3c",
+		"_postman_id": "4593988c-64d8-4400-b94c-020286adff5b",
 		"name": "delivery food",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,124 +9,13 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "get user",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkcmVzc0BnbWFpbC5jb20iLCJuYW1lIjoiQWxleCIsImlkIjoiMTYiLCJpYXQiOjE1ODkzOTU0MDUsImV4cCI6MTU4OTQ4MTgwNX0.UIj0zfNOWmng_jWFSH5s7KQendHYBmkLH0IDHEfv2OY",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:3000/api/users/16",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"16"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update user",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkcmVzc0BnbWFpbC5jb20iLCJuYW1lIjoiQWxleCIsImlkIjoiMTYiLCJpYXQiOjE1ODkzOTU0MDUsImV4cCI6MTU4OTQ4MTgwNX0.UIj0zfNOWmng_jWFSH5s7KQendHYBmkLH0IDHEfv2OY",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Alexandr\",\n\t\"surname\": \"Katalalala\",\n\t\"email\": \"adress@gmail.com\",\n\t\"password\": \"0000\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:3000/api/users/16",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"16"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete user",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkcmVzc0BnbWFpbC5jb20iLCJuYW1lIjoiQWxleCIsImlkIjoiMTkiLCJpYXQiOjE1ODk0Nzc1OTgsImV4cCI6MTU4OTU2Mzk5OH0.mmtAE3bnb5KSePE93Hdj2mBOeZvykK1qI83yWhv_gzY",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:3000/api/users/19",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"19"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "registration",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Alex\",\n\t\"surname\": \"Katala\",\n\t\"email\": \"adress@gmail.com\",\n\t\"password\": \"12345\"\n}",
+							"raw": "{\n\t\"name\": \"Alex\",\n\t\"surname\": \"Katala\",\n\t\"email\": \"myadress@gmail.com\",\n\t\"password\": \"0000\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -159,7 +48,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"adress@gmail.com\",\n\t\"password\": \"0000\"\n}",
+							"raw": "{\n\t\"email\": \"myadress@gmail.com\",\n\t\"password\": \"0000\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -186,14 +75,14 @@
 					"response": []
 				},
 				{
-					"name": "get basket",
+					"name": "get user",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkcmVzc0BnbWFpbC5jb20iLCJuYW1lIjoiQWxleCIsImlkIjoiMjAiLCJpYXQiOjE1ODk0ODMyMjEsImV4cCI6MTU4OTU2OTYyMX0.iUIMuB30iisMaQGVdfIVB_oJ3Rmm6pLWUU4NdiZbBLo",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMjIxMDMwLCJleHAiOjE2MTAzMDc0MzB9.RyadbUlRkRHLwtOuLJvrZ7XXSWL_WGCjPVmrKD0asU4",
 									"type": "string"
 								}
 							]
@@ -201,7 +90,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:3000/api/users/20/basket",
+							"raw": "http://127.0.0.1:3000/api/users/4",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -213,20 +102,38 @@
 							"path": [
 								"api",
 								"users",
-								"20",
-								"basket"
+								"4"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "update basket",
+					"name": "update user",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkcmVzc0BnbWFpbC5jb20iLCJuYW1lIjoiQWxleGFuZHIiLCJpZCI6IjEiLCJpYXQiOjE2MTAyMjI4NDgsImV4cCI6MTYxMDMwOTI0OH0.Emmjb_aIlbE4b5LnhWXQDAdnLoMYCieog7fRhdNtF1Y",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Alexandr\",\n\t\"surname\": \"Katalalala\",\n\t\"email\": \"adress@gmail.com\",\n\t\"password\": \"0000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://127.0.0.1:3000/api/users/1/basket",
+							"raw": "http://127.0.0.1:3000/api/users/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -238,145 +145,29 @@
 							"path": [
 								"api",
 								"users",
-								"1",
-								"basket"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get orders",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:3000/api/users/1/orders",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
 								"1"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"1",
-								"orders"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "create order",
+					"name": "delete user",
 					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:3000/api/users/1/orders",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"1",
-								"orders"
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkcmVzc0BnbWFpbC5jb20iLCJuYW1lIjoiQWxleGFuZHIiLCJpZCI6IjEiLCJpYXQiOjE2MTAyMjI4NjcsImV4cCI6MTYxMDMwOTI2N30.2FHygYuoYlPmyR9kD0-JxZHyM6NyVdNZ71xk9oy6Z9c",
+									"type": "string"
+								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get address",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:3000/api/users/1/address",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"1",
-								"address"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create address",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:3000/api/users/1/address",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"1",
-								"address"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update address",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:3000/api/users/1/address",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"1",
-								"address"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete address",
-					"request": {
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:3000/api/users/1/address",
+							"raw": "http://127.0.0.1:3000/api/users/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -388,8 +179,7 @@
 							"path": [
 								"api",
 								"users",
-								"1",
-								"address"
+								"1"
 							]
 						}
 					},
@@ -398,6 +188,16 @@
 				{
 					"name": "avatar upload",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMjIxMDMwLCJleHAiOjE2MTAzMDc0MzB9.RyadbUlRkRHLwtOuLJvrZ7XXSWL_WGCjPVmrKD0asU4",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -406,12 +206,12 @@
 								{
 									"key": "avatar",
 									"type": "file",
-									"src": "/home/katala/Загрузки/delivery_food.png"
+									"src": "/home/katala/Рабочий стол/2d28ff0910ca10f0d05caf961260512b.jpg"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:3000/api/users/registration/avatar",
+							"raw": "http://127.0.0.1:3000/api/users/4/avatar",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -423,15 +223,785 @@
 							"path": [
 								"api",
 								"users",
-								"registration",
+								"4",
 								"avatar"
 							]
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "add dish in basket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMzk1ODk4LCJleHAiOjE2MTA0ODIyOTh9.lZluwB_CZx5tWnfBl7nhE4V8NziO18LTWXD8mhiwUl8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/basket/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"basket",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get basket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMjI0MTkwLCJleHAiOjE2MTAzMTA1OTB9.gW2uNk-VOLupd-5dZkkZpQfNRc_vkMsHe8J-Gnc0anA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/basket",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"basket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete dish from basket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMjI0MTkwLCJleHAiOjE2MTAzMTA1OTB9.gW2uNk-VOLupd-5dZkkZpQfNRc_vkMsHe8J-Gnc0anA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/basket/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"basket",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add favourite restaurant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMjI0MTkwLCJleHAiOjE2MTAzMTA1OTB9.gW2uNk-VOLupd-5dZkkZpQfNRc_vkMsHe8J-Gnc0anA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/favourite_restaurants/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"favourite_restaurants",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get favourite restaurants",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMjI0MTkwLCJleHAiOjE2MTAzMTA1OTB9.gW2uNk-VOLupd-5dZkkZpQfNRc_vkMsHe8J-Gnc0anA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/favourite_restaurants",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"favourite_restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete favourite restaurant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMjI0MTkwLCJleHAiOjE2MTAzMTA1OTB9.gW2uNk-VOLupd-5dZkkZpQfNRc_vkMsHe8J-Gnc0anA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/favourite_restaurants/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"favourite_restaurants",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMzk1ODk4LCJleHAiOjE2MTA0ODIyOTh9.lZluwB_CZx5tWnfBl7nhE4V8NziO18LTWXD8mhiwUl8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"delivery_address_id\": 2,\n    \"order_cost\": 300,\n    \"restaurant_id\": 3,\n    \"dishes_list\": [\n        {\n            \"id\": 7,\n            \"quantity\": 2\n        },\n        {\n            \"id\": 10,\n            \"quantity\": 3\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/orders",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMzk1ODk4LCJleHAiOjE2MTA0ODIyOTh9.lZluwB_CZx5tWnfBl7nhE4V8NziO18LTWXD8mhiwUl8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/orders",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMzk1ODk4LCJleHAiOjE2MTA0ODIyOTh9.lZluwB_CZx5tWnfBl7nhE4V8NziO18LTWXD8mhiwUl8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/orders/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"orders",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMzk1ODk4LCJleHAiOjE2MTA0ODIyOTh9.lZluwB_CZx5tWnfBl7nhE4V8NziO18LTWXD8mhiwUl8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"delivery_address_id\": 2,\n    \"order_cost\": 400,\n    \"restaurant_id\": 3,\n    \"dishes_list\": [\n        {\n            \"id\": 7,\n            \"quantity\": 2\n        },\n        {\n            \"id\": 10,\n            \"quantity\": 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/orders/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"orders",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMzk1ODk4LCJleHAiOjE2MTA0ODIyOTh9.lZluwB_CZx5tWnfBl7nhE4V8NziO18LTWXD8mhiwUl8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"address_name\": \"work\",\n    \"address\": \"3425 Stone Street, Apt. 2A, Jacksonville, FL 39404\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all addresses",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMzk1ODk4LCJleHAiOjE2MTA0ODIyOTh9.lZluwB_CZx5tWnfBl7nhE4V8NziO18LTWXD8mhiwUl8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMzk1ODk4LCJleHAiOjE2MTA0ODIyOTh9.lZluwB_CZx5tWnfBl7nhE4V8NziO18LTWXD8mhiwUl8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/address/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMzk1ODk4LCJleHAiOjE2MTA0ODIyOTh9.lZluwB_CZx5tWnfBl7nhE4V8NziO18LTWXD8mhiwUl8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"address_name\": \"my work\",\n    \"address\": \"3425 Stone Street, Apt. 2A, Jacksonville, FL 39404\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/address/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwMzk1ODk4LCJleHAiOjE2MTA0ODIyOTh9.lZluwB_CZx5tWnfBl7nhE4V8NziO18LTWXD8mhiwUl8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/address/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwNDc5MzE1LCJleHAiOjE2MTA1NjU3MTV9.3aIfjXq_jW3N1nxJABazysCmHHDfeRSgCbThtOzyyW0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"review\": \"cooool\",\n\t\"rating\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/reviews/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"reviews",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add all reviews of restaurant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwNDc5MzE1LCJleHAiOjE2MTA1NjU3MTV9.3aIfjXq_jW3N1nxJABazysCmHHDfeRSgCbThtOzyyW0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/reviews/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"reviews",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwNDc5MzE1LCJleHAiOjE2MTA1NjU3MTV9.3aIfjXq_jW3N1nxJABazysCmHHDfeRSgCbThtOzyyW0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/reviews/3/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"reviews",
+								"3",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwNDc5MzE1LCJleHAiOjE2MTA1NjU3MTV9.3aIfjXq_jW3N1nxJABazysCmHHDfeRSgCbThtOzyyW0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"review\": \"cooool\",\n\t\"rating\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/reviews/3/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"reviews",
+								"3",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiI0IiwiaWF0IjoxNjEwNDc5MzE1LCJleHAiOjE2MTA1NjU3MTV9.3aIfjXq_jW3N1nxJABazysCmHHDfeRSgCbThtOzyyW0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/users/4/reviews/3/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"4",
+								"reviews",
+								"3",
+								"3"
+							]
+						}
+					},
+					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Restaurants",
@@ -465,7 +1035,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:3000/api/restaurants/1",
+							"raw": "http://127.0.0.1:3000/api/restaurants/3",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -477,7 +1047,7 @@
 							"path": [
 								"api",
 								"restaurants",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -489,7 +1059,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:3000/api/restaurants/1/reviews",
+							"raw": "http://127.0.0.1:3000/api/restaurants/3/reviews",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -501,7 +1071,7 @@
 							"path": [
 								"api",
 								"restaurants",
-								"1",
+								"3",
 								"reviews"
 							]
 						}
@@ -514,7 +1084,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:3000/api/restaurants/1/menu",
+							"raw": "http://127.0.0.1:3000/api/restaurants/3/menu",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -526,15 +1096,14 @@
 							"path": [
 								"api",
 								"restaurants",
-								"1",
+								"3",
 								"menu"
 							]
 						}
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Admins",
@@ -544,6 +1113,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nameAdmin\": \"sushi master admin-yola\",\n    \"password\": \"0000\",\n    \"nameRestaurant\": \"Sushi Master\",\n    \"description\": \"Ресторан Суши\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:3000/api/admins/registration",
 							"protocol": "http",
@@ -568,6 +1146,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nameAdmin\": \"sushi master admin-yola\",\n    \"password\": \"0000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:3000/api/admins/login",
 							"protocol": "http",
@@ -590,6 +1177,16 @@
 				{
 					"name": "get restaurant",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50X2lkIjoxLCJuYW1lIjoic3VzaGkgbWFzdGVyIGFkbWluLXlvbGEiLCJpZCI6MSwiaWF0IjoxNjA5NzkyODA3LCJleHAiOjE2MDk4NzkyMDd9.5jSR4PEv4ZQlX61ufY77TiWtWIEzXEUbdYnZ2mL7l40",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -614,8 +1211,27 @@
 				{
 					"name": "update restaurant",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50X2lkIjoxLCJuYW1lIjoic3VzaGkgbWFzdGVyIGFkbWluLXlvbGEiLCJpZCI6MSwiaWF0IjoxNjA5NzkyODA3LCJleHAiOjE2MDk4NzkyMDd9.5jSR4PEv4ZQlX61ufY77TiWtWIEzXEUbdYnZ2mL7l40",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nameAdmin\": \"sushi master admin-yola\",\n    \"password\": \"0000\",\n    \"nameRestaurant\": \"Sushi Master\",\n    \"description\": \"Ресторан Суши №1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:3000/api/admins/1",
 							"protocol": "http",
@@ -638,10 +1254,20 @@
 				{
 					"name": "delete restaurant",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50X2lkIjoyLCJuYW1lIjoic3VzaGkgbWFzdGVyIGFkbWluLXlvbGEiLCJpZCI6MiwiaWF0IjoxNjA5NzkzNDgxLCJleHAiOjE2MDk4Nzk4ODF9.ZXswjJSdTslJza93ObD3VkYzDwZ0NM0j2HhAsC-fOYs",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:3000/api/admins/1",
+							"raw": "http://127.0.0.1:3000/api/admins/2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -653,7 +1279,42 @@
 							"path": [
 								"api",
 								"admins",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50X2lkIjozLCJuYW1lIjoic3VzaGkgbWFzdGVyIGFkbWluLXlvbGEiLCJpZCI6MywiaWF0IjoxNjEwNDg0OTUzLCJleHAiOjE2MTA1NzEzNTN9._-Tt0vQIuI4iXms6ODK1gqRO6V98Fg4P4hcjoR7LpK4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/admins/3/orders",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
 								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admins",
+								"3",
+								"orders"
 							]
 						}
 					},
@@ -662,10 +1323,20 @@
 				{
 					"name": "get order",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50X2lkIjozLCJuYW1lIjoic3VzaGkgbWFzdGVyIGFkbWluLXlvbGEiLCJpZCI6MywiaWF0IjoxNjEwNDg0OTUzLCJleHAiOjE2MTA1NzEzNTN9._-Tt0vQIuI4iXms6ODK1gqRO6V98Fg4P4hcjoR7LpK4",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:3000/api/admins/1/orders",
+							"raw": "http://127.0.0.1:3000/api/admins/3/orders/3",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -677,8 +1348,9 @@
 							"path": [
 								"api",
 								"admins",
-								"1",
-								"orders"
+								"3",
+								"orders",
+								"3"
 							]
 						}
 					},
@@ -687,10 +1359,29 @@
 				{
 					"name": "update order",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50X2lkIjozLCJuYW1lIjoic3VzaGkgbWFzdGVyIGFkbWluLXlvbGEiLCJpZCI6MywiaWF0IjoxNjEwNDg0OTUzLCJleHAiOjE2MTA1NzEzNTN9._-Tt0vQIuI4iXms6ODK1gqRO6V98Fg4P4hcjoR7LpK4",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"accepted\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://127.0.0.1:3000/api/admins/1/orders",
+							"raw": "http://127.0.0.1:3000/api/admins/3/orders/3",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -702,8 +1393,9 @@
 							"path": [
 								"api",
 								"admins",
-								"1",
-								"orders"
+								"3",
+								"orders",
+								"3"
 							]
 						}
 					},
@@ -733,10 +1425,286 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "file upload",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50X2lkIjozLCJuYW1lIjoic3VzaGkgbWFzdGVyIGFkbWluLXlvbGEiLCJpZCI6MywiaWF0IjoxNjEwMTE5MDIxLCJleHAiOjE2MTAyMDU0MjF9.1MGlLsbgRpNOXOVdLwE3M9sPwPAop5Xa1ZOQ4JfrGZc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo-dish",
+									"type": "file",
+									"src": "/home/katala/Рабочий стол/1cd2a59c53fd8f5f5a63289040f23275--zima-advent.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/admins/3/dishes/10/photo",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admins",
+								"3",
+								"dishes",
+								"10",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create dish",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50X2lkIjozLCJuYW1lIjoic3VzaGkgbWFzdGVyIGFkbWluLXlvbGEiLCJpZCI6MywiaWF0IjoxNjEwMTE5MDIxLCJleHAiOjE2MTAyMDU0MjF9.1MGlLsbgRpNOXOVdLwE3M9sPwPAop5Xa1ZOQ4JfrGZc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"roll tempura\",\n    \"description\": \"roll tempura is a hot rolls\",\n    \"price\": \"250\",\n    \"category\": \"rolls\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/admins/3/dishes",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admins",
+								"3",
+								"dishes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all dishes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50X2lkIjozLCJuYW1lIjoic3VzaGkgbWFzdGVyIGFkbWluLXlvbGEiLCJpZCI6MywiaWF0IjoxNjEwMTE5MDIxLCJleHAiOjE2MTAyMDU0MjF9.1MGlLsbgRpNOXOVdLwE3M9sPwPAop5Xa1ZOQ4JfrGZc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/admins/3/dishes",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admins",
+								"3",
+								"dishes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get dish ",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50X2lkIjozLCJuYW1lIjoic3VzaGkgbWFzdGVyIGFkbWluLXlvbGEiLCJpZCI6MywiaWF0IjoxNjEwMTE5MDIxLCJleHAiOjE2MTAyMDU0MjF9.1MGlLsbgRpNOXOVdLwE3M9sPwPAop5Xa1ZOQ4JfrGZc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/admins/3/dishes/10",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admins",
+								"3",
+								"dishes",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update dish",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50X2lkIjozLCJuYW1lIjoic3VzaGkgbWFzdGVyIGFkbWluLXlvbGEiLCJpZCI6MywiaWF0IjoxNjEwMTE5MDIxLCJleHAiOjE2MTAyMDU0MjF9.1MGlLsbgRpNOXOVdLwE3M9sPwPAop5Xa1ZOQ4JfrGZc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"roll tempura\",\n    \"description\": \"roll tempura is a hot rolls\",\n    \"price\": \"250\",\n    \"category\": \"hot rolls\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/admins/3/dishes/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admins",
+								"3",
+								"dishes",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete dish",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50X2lkIjozLCJuYW1lIjoic3VzaGkgbWFzdGVyIGFkbWluLXlvbGEiLCJpZCI6MywiaWF0IjoxNjEwMTE5MDIxLCJleHAiOjE2MTAyMDU0MjF9.1MGlLsbgRpNOXOVdLwE3M9sPwPAop5Xa1ZOQ4JfrGZc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/admins/3/dishes/9",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admins",
+								"3",
+								"dishes",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all reviews",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50X2lkIjozLCJuYW1lIjoic3VzaGkgbWFzdGVyIGFkbWluLXlvbGEiLCJpZCI6MywiaWF0IjoxNjEwNDg0OTUzLCJleHAiOjE2MTA1NzEzNTN9._-Tt0vQIuI4iXms6ODK1gqRO6V98Fg4P4hcjoR7LpK4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/admins/3/reviews",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admins",
+								"3",
+								"reviews"
+							]
+						}
+					},
+					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

@@ -18,7 +18,7 @@ class AdminRepository {
                     [nameRestaurant, description],
                 );
                 adminRawData = await this._pool.query(
-                    'INSERT INTO public."admins" (name, password, restarant_idRawData) VALUES ($1, $2, $3) RETURNING *;',
+                    'INSERT INTO public."admins" (name, password, restaurant_id) VALUES ($1, $2, $3) RETURNING *;',
                     [nameAdmin, password, restaurantRawData.rows[0].id],
                 );
                 await this._pool.query('COMMIT');
@@ -31,6 +31,23 @@ class AdminRepository {
                 name: adminRawData.rows[0].name,
                 restaurant: restaurantRawData.rows[0].id,
             });
+        } catch (error) {
+            throw Error(error);
+        }
+    }
+
+    async get(id) {
+        try {
+            const adminRawData = await this._pool.query(
+                'SELECT * FROM public."admins" where id=$1;',
+                [id],
+            );
+            const admin = new Admin({
+                id: adminRawData.rows[0].id,
+                name: adminRawData.rows[0].name,
+                restaurant: adminRawData.rows[0].restaurant_id,
+            });
+            return admin;
         } catch (error) {
             throw Error(error);
         }
@@ -79,7 +96,7 @@ class AdminRepository {
                 );
                 const restaurantId = restaurant_idRawData.rows[0].restaurant_id;
                 await this._pool.query(
-                    'DELETE FROM public."favourite_restaurants" WHERE restarant_id=$1;',
+                    'DELETE FROM public."favourite_restaurants" WHERE restaurant_id=$1;',
                     [restaurantId],
                 );
                 await this._pool.query(

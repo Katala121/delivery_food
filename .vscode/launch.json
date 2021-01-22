@@ -9,18 +9,10 @@
             "request": "launch",
             "name": "server",
             "program": "${workspaceFolder}/src/server.js",
+            "envFile": "${workspaceFolder}/.env",
             "skipFiles": [
                 "<node_internals>/**"
             ]
         },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/server.js"
-        }
     ]
 }

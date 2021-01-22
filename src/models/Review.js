@@ -1,8 +1,11 @@
 class Review {
-    constructor({ id, restaurant_id, review }) {
+    constructor({
+        id, restaurant_id, review, rating,
+    }) {
         this._id = id;
         this._restaurant_id = restaurant_id;
         this._review = review;
+        this._rating = rating;
     }
 
     get id() {
@@ -21,11 +24,20 @@ class Review {
         this._review = newValue;
     }
 
+    get rating() {
+        return this._rating;
+    }
+
+    set rating(newValue) {
+        this._rating = newValue;
+    }
+
     toJSON() {
         return {
             id: this.id,
             restaurant_id: this.restaurant_id,
             review: this.review,
+            rating: this.rating,
         };
     }
 }

@@ -1,6 +1,7 @@
 import express from 'express';
-import Auth from '../authentication/Auth.js';
+import Auth from '../middleware/Auth.js';
 import AdminController from '../controllers/AdminController.js';
+import fileUpload from '../middleware/FileUpload.js';
 
 class AdminRouter  {
     constructor(pool) {
@@ -22,6 +23,7 @@ class AdminRouter  {
         this._router.route('/:id/dishes/:dish_id').get(this._adminController.getDish);
         this._router.route('/:id/dishes/:dish_id').put(this._adminController.updateDish);
         this._router.route('/:id/dishes/:dish_id').delete(this._adminController.deleteDish);
+        this._router.route('/:id/dishes/:dish_id/photo').post(fileUpload.single('photo-dish'), this._adminController.fileUpload);
 
         this._router.route('/:id/orders').get(this._adminController.getAllOrders);
         this._router.route('/:id/orders/:order_id').get(this._adminController.getOrder);

@@ -4,15 +4,15 @@ class OrderRepository {
     }
 
     async create({
-        user_id, delivery_address_id, order_cost, restaurant_id, order_time, dishes_list,
+        user_id, delivery_address_id, order_cost, restaurant_id, dishes_list,
     }) {
         try {
             let orderRawData;
             await this._pool.query('BEGIN');
             try {
                 orderRawData = await this._pool.query(
-                    'INSERT INTO public."orders" (user_id, delivery_address_id, order_cost, restaurant_id, order_time ) VALUES ($1, (SELECT id FROM public."delivery_addresses" WHERE id=$2 AND user_id=$1), $3, $4, $5) RETURNING *;',
-                    [user_id, delivery_address_id, order_cost, restaurant_id, order_time],
+                    'INSERT INTO public."orders" (user_id, delivery_address_id, order_cost, restaurant_id, order_time ) VALUES ($1, (SELECT id FROM public."delivery_addresses" WHERE id=$2 AND user_id=$1), $3, $4, (SELECT LOCALTIMESTAMP)) RETURNING *;',
+                    [user_id, delivery_address_id, order_cost, restaurant_id],
                 );
                 await this._pool.query('COMMIT');
             } catch (error) {
@@ -21,7 +21,7 @@ class OrderRepository {
             }
             dishes_list.forEach(async (dish) => {
                 await this._pool.query(
-                    'INSERT INTO public."list_of_dishes_order" (order_id, dish_id, quantity) VALUES ($1, $2, $3) RETURNING *;',
+                    'INSERT INTO public."list_of_dishes_order" (order_id, dish_id, quantity) VALUES ($1, $2, $3);',
                     [orderRawData.rows[0].id, dish.id, dish.quantity],
                 );
                 await this._pool.query(
@@ -112,15 +112,15 @@ class OrderRepository {
     }
 
     async update({
-        user_id, delivery_address_id, order_cost, restaurant_id, order_time, dishes_list, order_id,
+        user_id, delivery_address_id, order_cost, restaurant_id, dishes_list, order_id,
     }) {
         try {
             let orderRawData;
             await this._pool.query('BEGIN');
             try {
                 orderRawData = await this._pool.query(
-                    'UPDATE public."orders" SET user_id=$1, delivery_address_id=(SELECT id FROM public."delivery_addresses" WHERE id=$2 AND user_id=$1), order_cost=$3, restaurant_id=$4, order_time=$5 WHERE id=$6 RETURNING *;',
-                    [user_id, delivery_address_id, order_cost, restaurant_id, order_time, order_id],
+                    'UPDATE public."orders" SET user_id=$1, delivery_address_id=(SELECT id FROM public."delivery_addresses" WHERE id=$2 AND user_id=$1), order_cost=$3, restaurant_id=$4 WHERE id=$5 RETURNING *;',
+                    [user_id, delivery_address_id, order_cost, restaurant_id, order_id],
                 );
                 await this._pool.query(
                     'DELETE FROM public."list_of_dishes_order" WHERE order_id=$1;',
