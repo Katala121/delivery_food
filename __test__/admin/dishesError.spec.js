@@ -1,11 +1,11 @@
 import express from 'express';
 import request  from 'supertest';
-import AdminRouter from '../src/routers/AdminRouter.js';
-import DishRepository from '../src/repositories/DishRepository.js';
-import Admin from '../src/models/Admin.js';
-import Dish from '../src/models/Dish.js';
-import auth from '../src/middleware/Auth.js';
-import multer from '../src/middleware/FileUpload.js';
+import AdminRouter from '../../src/routers/AdminRouter.js';
+import DishRepository from '../../src/repositories/DishRepository.js';
+import Admin from '../../src/models/Admin.js';
+import Dish from '../../src/models/Dish.js';
+import auth from '../../src/middleware/Auth.js';
+import multer from '../../src/middleware/FileUpload.js';
 
 const app = express();
 app.use(express.json());
@@ -13,9 +13,9 @@ app.use(express.json());
 const client = { query: jest.fn(), release: jest.fn() };
 const pool = { connect: jest.fn(() => client), query: jest.fn() };
 
-jest.mock('../src/repositories/DishRepository.js');
-jest.mock('../src/middleware/Auth.js');
-jest.mock('../src/middleware/FileUpload.js');
+jest.mock('../../src/repositories/DishRepository.js');
+jest.mock('../../src/middleware/Auth.js');
+jest.mock('../../src/middleware/FileUpload.js');
 
 auth.mockImplementation(() => {
     return {
@@ -76,11 +76,11 @@ const admin = new Admin({
 });
 
 describe('test dish route', () => {
-    test('test dish POST method success answer', async () => {
+    test('test dish POST method ERROR answer', async () => {
         const adminRouter = new AdminRouter(pool);
 
         const res = await request(app.use('/api/admins', adminRouter.router))
-            .post('/api/admins/1/dishes')
+            .post('/api/admins/2/dishes')
             .send({
                 title: "roll tempura",
                 description: "roll tempura is a hot rolls",
@@ -88,38 +88,38 @@ describe('test dish route', () => {
                 category: "rolls"
             });
 
-        const response = res.body;
+        const response = res.text;
 
-        expect(JSON.stringify(response)).toBe(JSON.stringify(dish));
+        expect(response).toBe('Invalid admin information');
     });
 
-    test('test dish GET ALL method success answer', async () => {
+    test('test dish GET ALL method ERROR answer', async () => {
         const adminRouter = new AdminRouter(pool);
 
         const res = await request(app.use('/api/admins', adminRouter.router))
-            .get('/api/admins/1/dishes');
+            .get('/api/admins/2/dishes');
 
-        const response = res.body;
+        const response = res.text;
 
-        expect(JSON.stringify(response)).toBe(JSON.stringify(dish));
+        expect(response).toBe('Invalid admin information');
     });
 
-    test('test dish GET method success answer', async () => {
+    test('test dish GET method ERROR answer', async () => {
         const adminRouter = new AdminRouter(pool);
 
         const res = await request(app.use('/api/admins', adminRouter.router))
-            .get('/api/admins/1/dishes/1');
+            .get('/api/admins/2/dishes/1');
 
-        const response = res.body;
+        const response = res.text;
 
-        expect(JSON.stringify(response)).toBe(JSON.stringify(dish));
+        expect(response).toBe('Invalid admin information');
     });
 
-    test('test dish PUT method success answer', async () => {
+    test('test dish PUT method ERROR answer', async () => {
         const adminRouter = new AdminRouter(pool);
 
         const res = await request(app.use('/api/admins', adminRouter.router))
-            .put('/api/admins/1/dishes/1')
+            .put('/api/admins/2/dishes/1')
             .send({
                 title: "roll tempura",
                 description: "roll tempura is a hot rolls",
@@ -127,30 +127,30 @@ describe('test dish route', () => {
                 category: "rolls"
             });
 
-        const response = res.body;
+        const response = res.text;
 
-        expect(JSON.stringify(response)).toBe(JSON.stringify(dish));
+        expect(response).toBe('Invalid admin information');
     });
 
-    test('test dish DELETE method success answer', async () => {
+    test('test dish DELETE method ERROR answer', async () => {
         const adminRouter = new AdminRouter(pool);
 
         const res = await request(app.use('/api/admins', adminRouter.router))
-            .delete('/api/admins/1/dishes/1');
+            .delete('/api/admins/2/dishes/1');
 
         const response = res.text;
 
-        expect(response).toBe('title deleted');
+        expect(response).toBe('Invalid admin information');
     });
 
-    test('test dish AVATAR_UPLOAD method success answer', async () => {
+    test('test dish AVATAR_UPLOAD method ERROR answer', async () => {
         const adminRouter = new AdminRouter(pool);
 
         const res = await request(app.use('/api/admins', adminRouter.router))
-            .post('/api/admins/1/dishes/1/photo');
+            .post('/api/admins/2/dishes/1/photo');
 
         const response = res.text;
 
-        expect(JSON.stringify(response)).toBe(JSON.stringify('link'));
+        expect(response).toBe('Invalid admin information');
     });
 });

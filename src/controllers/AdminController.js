@@ -2,7 +2,6 @@ import bcrypt           from 'bcryptjs';
 import OrderRepository  from '../repositories/OrderRepository.js';
 import AdminRepository  from '../repositories/AdminRepository.js';
 import AdminService  from '../services/AdminService.js';
-import RestaurantService  from '../services/RestaurantService.js';
 
 class AdminController {
     constructor(pool) {
@@ -24,7 +23,6 @@ class AdminController {
 
         this.adminService = new AdminService(pool);
         this.orderRepository = new OrderRepository(pool);
-        this.restaurantService = new RestaurantService(pool);
         this.adminRepository = new AdminRepository(pool);
     }
 

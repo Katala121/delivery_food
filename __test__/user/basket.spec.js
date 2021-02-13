@@ -1,9 +1,9 @@
 import express from 'express';
 import request  from 'supertest';
-import UserRouter from '../src/routers/UserRouter.js';
-import BasketRepository from '../src/repositories/BasketRepository.js';
-import User from '../src/models/User.js';
-import auth from '../src/middleware/Auth.js';
+import UserRouter from '../../src/routers/UserRouter.js';
+import BasketRepository from '../../src/repositories/BasketRepository.js';
+import User from '../../src/models/User.js';
+import auth from '../../src/middleware/Auth.js';
 
 const app = express();
 app.use(express.json());
@@ -11,8 +11,8 @@ app.use(express.json());
 const client = { query: jest.fn(), release: jest.fn() };
 const pool = { connect: jest.fn(() => client), query: jest.fn() };
 
-jest.mock('../src/repositories/BasketRepository.js');
-jest.mock('../src/middleware/Auth.js');
+jest.mock('../../src/repositories/BasketRepository.js');
+jest.mock('../../src/middleware/Auth.js');
 
 auth.mockImplementation(() => {
     return {
@@ -58,36 +58,36 @@ const user = new User({
 user._password = '$2a$15$3mzFsJ4wV7rBuChzRPRDbOaqPXasB0ugaIM1AiCW8py0EwWymQq4S';
 
 describe('test basket route', () => {
-    test('test basket GET method ERROR answer', async () => {
+    test('test basket GET method success answer', async () => {
         const userRouter = new UserRouter(pool);
 
         const res = await request(app.use('/api/users', userRouter.router))
-            .get('/api/users/2/basket');
+            .get('/api/users/1/basket');
 
-        const response = res.text.indexOf('Invalid user information');
-    
-        expect(response);
+        const response = res.body;
+
+        expect(JSON.stringify(response)).toBe(JSON.stringify(basket));
     });
 
-    test('test basket POST method ERROR answer', async () => {
+    test('test basket POST method success answer', async () => {
         const userRouter = new UserRouter(pool);
 
         const res = await request(app.use('/api/users', userRouter.router))
-            .post('/api/users/2/basket/1');
+            .post('/api/users/1/basket/1');
 
-        const response = res.text.indexOf('Invalid user information');
-    
-        expect(response);
+        const response = res.body;
+
+        expect(JSON.stringify(response)).toBe(JSON.stringify(basket));
     });
 
-    test('test basket DELETE method ERROR answer', async () => {
+    test('test basket DELETE method success answer', async () => {
         const userRouter = new UserRouter(pool);
 
         const res = await request(app.use('/api/users', userRouter.router))
-            .delete('/api/users/2/basket/1');
+            .delete('/api/users/1/basket/1');
 
-        const response = res.text.indexOf('Invalid user information');
-    
-        expect(response);
+        const response = res.body;
+
+        expect(JSON.stringify(response)).toBe(JSON.stringify(basket));
     });
 });

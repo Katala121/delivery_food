@@ -1,9 +1,9 @@
 import express from 'express';
 import request  from 'supertest';
-import UserRouter from '../src/routers/UserRouter.js';
-import AddressRepository from '../src/repositories/AddressRepository.js';
-import User from '../src/models/User.js';
-import auth from '../src/middleware/Auth.js';
+import UserRouter from '../../src/routers/UserRouter.js';
+import ReviewRepository from '../../src/repositories/ReviewRepository.js';
+import User from '../../src/models/User.js';
+import auth from '../../src/middleware/Auth.js';
 
 const app = express();
 app.use(express.json());
@@ -11,8 +11,8 @@ app.use(express.json());
 const client = { query: jest.fn(), release: jest.fn() };
 const pool = { connect: jest.fn(() => client), query: jest.fn() };
 
-jest.mock('../src/repositories/AddressRepository.js');
-jest.mock('../src/middleware/Auth.js');
+jest.mock('../../src/repositories/ReviewRepository.js');
+jest.mock('../../src/middleware/Auth.js');
 
 auth.mockImplementation(() => {
     return {
@@ -23,31 +23,31 @@ auth.mockImplementation(() => {
     }
 });
 
-AddressRepository.mockImplementation(() => {
+ReviewRepository.mockImplementation(() => {
     return {
         create: () => {
-            return address;
+            return review;
         },
-        getAll: () => {
-            return address;
+        findByRestaurantId: () => {
+            return review;
         },
         get: () => {
-            return address;
+            return review;
         },
         update: () => {
-            return address;
+            return review;
         },
         delete: () => {
-            return address;
+            return review;
         },
     }
 });
 
-const address = {
+const review = {
     "id": "1",
-    "user_id": "1",
-    "address_name": "work",
-    "address": "3425 Stone Street, Apt. 2A, Jacksonville, FL 39404"
+    "restaurant_id": 1,
+    "review": "normal",
+    "rating": 3
 };
 
 const user = new User({
@@ -59,15 +59,15 @@ const user = new User({
 });
 user._password = '$2a$15$3mzFsJ4wV7rBuChzRPRDbOaqPXasB0ugaIM1AiCW8py0EwWymQq4S';
 
-describe('test address route', () => {
-    test('test address POST method ERROR answer', async () => {
+describe('test reviews route', () => {
+    test('test reviews POST method ERROR answer', async () => {
         const userRouter = new UserRouter(pool);
 
         const res = await request(app.use('/api/users', userRouter.router))
-            .post('/api/users/2/address')
+            .post('/api/users/2/reviews/1')
             .send({
-                address_name: "work",
-                address: "3425 Stone Street, Apt. 2A, Jacksonville, FL 39404"
+                review: "normal",
+	            rating: 3
             });
 
         const response = res.text.indexOf('Invalid user information');
@@ -75,36 +75,36 @@ describe('test address route', () => {
         expect(response);
     });
 
-    test('test address GET ALL method ERROR answer', async () => {
+    test('test reviews GET ALL method ERROR answer', async () => {
         const userRouter = new UserRouter(pool);
 
         const res = await request(app.use('/api/users', userRouter.router))
-            .get('/api/users/2/address');
+            .get('/api/users/2/reviews/1');
 
         const response = res.text.indexOf('Invalid user information');
 
         expect(response);
     });
 
-    test('test address GET method ERROR answer', async () => {
+    test('test reviews GET method ERROR answer', async () => {
         const userRouter = new UserRouter(pool);
 
         const res = await request(app.use('/api/users', userRouter.router))
-            .get('/api/users/2/address/1');
+            .get('/api/users/2/reviews/1/1');
 
         const response = res.text.indexOf('Invalid user information');
 
         expect(response);
     });
 
-    test('test address PUT method ERROR answer', async () => {
+    test('test reviews PUT method ERROR answer', async () => {
         const userRouter = new UserRouter(pool);
 
         const res = await request(app.use('/api/users', userRouter.router))
-            .put('/api/users/2/address/1')
+            .put('/api/users/2/reviews/1/1')
             .send({
-                address_name: "work",
-                address: "3425 Stone Street, Apt. 2A, Jacksonville, FL 39404"
+                review: "normal",
+	            rating: 3
             });
 
         const response = res.text.indexOf('Invalid user information');
@@ -112,11 +112,11 @@ describe('test address route', () => {
         expect(response);
     });
 
-    test('test address DELETE method ERROR answer', async () => {
+    test('test reviews DELETE method ERROR answer', async () => {
         const userRouter = new UserRouter(pool);
 
         const res = await request(app.use('/api/users', userRouter.router))
-            .delete('/api/users/2/address/1');
+            .delete('/api/users/2/reviews/1/1');
 
         const response = res.text.indexOf('Invalid user information');
 

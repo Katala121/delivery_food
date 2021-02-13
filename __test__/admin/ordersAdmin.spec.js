@@ -1,9 +1,9 @@
 import express from 'express';
 import request  from 'supertest';
-import AdminRouter from '../src/routers/AdminRouter.js';
-import OrderRepository from '../src/repositories/OrderRepository.js';
-import Admin from '../src/models/Admin.js';
-import auth from '../src/middleware/Auth.js';
+import AdminRouter from '../../src/routers/AdminRouter.js';
+import OrderRepository from '../../src/repositories/OrderRepository.js';
+import Admin from '../../src/models/Admin.js';
+import auth from '../../src/middleware/Auth.js';
 
 const app = express();
 app.use(express.json());
@@ -11,8 +11,8 @@ app.use(express.json());
 const client = { query: jest.fn(), release: jest.fn() };
 const pool = { connect: jest.fn(() => client), query: jest.fn() };
 
-jest.mock('../src/repositories/OrderRepository.js');
-jest.mock('../src/middleware/Auth.js');
+jest.mock('../../src/repositories/OrderRepository.js');
+jest.mock('../../src/middleware/Auth.js');
 
 auth.mockImplementation(() => {
     return {
@@ -59,35 +59,35 @@ describe('test orderAdmin route', () => {
         const adminRouter = new AdminRouter(pool);
 
         const res = await request(app.use('/api/admins', adminRouter.router))
-            .get('/api/admins/2/orders');
+            .get('/api/admins/1/orders');
 
-        const response = res.text;
+        const response = res.body;
 
-        expect(response).toBe('Invalid admin information');
+        expect(JSON.stringify(response)).toBe(JSON.stringify(order));
     });
 
     test('test order GET method success answer', async () => {
         const adminRouter = new AdminRouter(pool);
 
         const res = await request(app.use('/api/admins', adminRouter.router))
-            .get('/api/admins/2/orders/1');
+            .get('/api/admins/1/orders/1');
 
-        const response = res.text;
+        const response = res.body;
 
-        expect(response).toBe('Invalid admin information');
+        expect(JSON.stringify(response)).toBe(JSON.stringify(order));
     });
 
     test('test orderAdmin PUT method success answer', async () => {
         const adminRouter = new AdminRouter(pool);
 
         const res = await request(app.use('/api/admins', adminRouter.router))
-            .put('/api/admins/2/orders/1')
+            .put('/api/admins/1/orders/1')
             .send({
                 status: 'cenceled'
             });
 
-        const response = res.text;
+        const response = res.body;
 
-        expect(response).toBe('Invalid admin information');
+        expect(JSON.stringify(response)).toBe(JSON.stringify(order));
     });
 });

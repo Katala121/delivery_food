@@ -1,9 +1,9 @@
 import express from 'express';
 import request  from 'supertest';
-import RestaurantRouter from '../src/routers/RestaurantRouter.js';
-import RestaurantRepository from '../src/repositories/RestaurantRepository.js';
-import ReviewRepository from '../src/repositories/ReviewRepository.js';
-import Dish from '../src/models/Dish.js';
+import RestaurantRouter from '../../src/routers/RestaurantRouter.js';
+import RestaurantRepository from '../../src/repositories/RestaurantRepository.js';
+import ReviewRepository from '../../src/repositories/ReviewRepository.js';
+import Dish from '../../src/models/Dish.js';
 
 const app = express();
 app.use(express.json());
@@ -11,8 +11,8 @@ app.use(express.json());
 const client = { query: jest.fn(), release: jest.fn() };
 const pool = { connect: jest.fn(() => client), query: jest.fn() };
 
-jest.mock('../src/repositories/RestaurantRepository.js');
-jest.mock('../src/repositories/ReviewRepository.js');
+jest.mock('../../src/repositories/RestaurantRepository.js');
+jest.mock('../../src/repositories/ReviewRepository.js');
 
 RestaurantRepository.mockImplementation(() => {
     return {

@@ -1,9 +1,9 @@
 import express from 'express';
 import request  from 'supertest';
-import AdminRouter from '../src/routers/AdminRouter.js';
-import AdminRepository from '../src/repositories/AdminRepository.js';
-import Admin from '../src/models/Admin.js';
-import auth from '../src/middleware/Auth.js';
+import AdminRouter from '../../src/routers/AdminRouter.js';
+import AdminRepository from '../../src/repositories/AdminRepository.js';
+import Admin from '../../src/models/Admin.js';
+import auth from '../../src/middleware/Auth.js';
 
 const app = express();
 app.use(express.json());
@@ -11,8 +11,8 @@ app.use(express.json());
 const client = { query: jest.fn(), release: jest.fn() };
 const pool = { connect: jest.fn(() => client), query: jest.fn() };
 
-jest.mock('../src/repositories/AdminRepository.js');
-jest.mock('../src/middleware/Auth.js');
+jest.mock('../../src/repositories/AdminRepository.js');
+jest.mock('../../src/middleware/Auth.js');
 
 auth.mockImplementation(() => {
     return {
@@ -27,7 +27,7 @@ auth.mockImplementation(() => {
  AdminRepository.mockImplementation(() => {
     return {
         createAdminAndRestaurant: () => {
-            return new Error('A restaurant with this name already exists');
+            return admin;
         },
         get: () => {
             return admin;
@@ -52,7 +52,7 @@ const admin = new Admin({
 });
 
 describe('test admin route', () => {
-    test('test admin REGISTRATION method ERROR answer', async () => {
+    test('test admin REGISTRATION method success answer', async () => {
         const adminRouter = new AdminRouter(pool);
 
         const res = await request(app.use('/api/admins', adminRouter.router))
@@ -63,43 +63,43 @@ describe('test admin route', () => {
                 description: 'any',
                 password: 'any',
             });
-        const response = res.text;
+        const response = res.body;
 
-        expect(response).toBe('A restaurant with this name already exists');
+        expect(JSON.stringify(response)).toBe(JSON.stringify(admin));
     });
 
-    test('test admin LOGIN method ERROR answer', async () => {
+    test('test admin LOGIN method success answer', async () => {
         const adminRouter = new AdminRouter(pool);
 
         const res = await request(app.use('/api/admins', adminRouter.router))
             .post('/api/admins/login')
             .send({
                 nameAdmin: 'email',
-                password: '1111',
+                password: '0000',
             });
         
-        const response = res.text;
+        const response = res.body;
 
-        expect(response).toBe('Invalid password');
+        expect(JSON.stringify(response)).toBe(JSON.stringify(admin));
     });
 
-    test('test admin GET method ERROR answer', async () => {
+    test('test admin GET method success answer', async () => {
         const adminRouter = new AdminRouter(pool);
 
 
         const res = await request(app.use('/api/admins', adminRouter.router))
-            .get('/api/admins/2');
+            .get('/api/admins/1');
         
-        const response = res.text.indexOf('Invalid admin information');
-    
-        expect(response);
+        const response = res.body;
+
+        expect(JSON.stringify(response)).toBe(JSON.stringify(admin));
     });
 
-    test('test admin UPDATE method ERROR answer', async () => {
+    test('test admin UPDATE method success answer', async () => {
         const adminRouter = new AdminRouter(pool);
 
         const res = await request(app.use('/api/admins', adminRouter.router))
-            .put('/api/admins/2')
+            .put('/api/admins/1')
             .send({
                 nameAdmin: 'any',
                 nameRestaurant: 'any',
@@ -107,19 +107,19 @@ describe('test admin route', () => {
                 password: 'any',
             });
         
-        const response = res.text.indexOf('Invalid admin information');
-    
-        expect(response);
+        const response = res.body;
+
+        expect(JSON.stringify(response)).toBe(JSON.stringify(admin));
     });
 
-    test('test admin DELETE method ERROR answer', async () => {
+    test('test admin DELETE method success answer', async () => {
         const userRouter = new AdminRouter(pool);
 
         const res = await request(app.use('/api/admins', userRouter.router))
-            .delete('/api/admins/2');
+            .delete('/api/admins/1');
 
-        const response = res.text.indexOf('Invalid admin information');
-    
-        expect(response);
+        const response = res.text;
+
+        expect(response).toBe('name deleted');
     });
 });
