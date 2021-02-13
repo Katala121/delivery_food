@@ -33,7 +33,7 @@ multer.single.mockImplementation(() => {
         };
         return next();
     };
-  });
+});
 
 UserRepository.mockImplementation(() => {
     return {

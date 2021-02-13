@@ -42,7 +42,7 @@ class AdminController {
                 nameAdmin, password: hash, nameRestaurant, description,
             });
             if (admin.message) {
-                next(new Error(admin.message));
+                response.send(admin.message);
             }
             response.send(admin);
         } catch (error) {
@@ -57,7 +57,7 @@ class AdminController {
         try {
             const admin = await this.adminService.login({ nameAdmin, password });
             if (admin.message) {
-                next(new Error(admin.message));
+                response.send(admin.message);
             }
             response.send(admin);
         } catch (error) {

@@ -39,7 +39,7 @@ class UserService {
     async login(email, password) {
         try {
             const user = await this.userRepository.findByEmail(email);
-            
+
             if (bcrypt.compareSync(password, user.password) === true) {
                 user._token = jwt.sign({
                     email: user.email,

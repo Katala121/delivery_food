@@ -38,14 +38,15 @@ class AdminService {
             const admin = await this.adminRepository.createAdminAndRestaurant({
                 nameAdmin, nameRestaurant, description, password,
             });
-
-            admin._token = jwt.sign({
-                restaurant_id: admin.restaurant,
-                name: admin.name,
-                id: admin.id,
-            }, password, {
-                expiresIn: '24h',
-            });
+            if(admin.id && admin.restaurant){
+                admin._token = jwt.sign({
+                    restaurant_id: admin.restaurant,
+                    name: admin.name,
+                    id: admin.id,
+                }, password, {
+                    expiresIn: '24h',
+                });
+            }
             return admin;
         } catch (error) {
             throw Error(error);

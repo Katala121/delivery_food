@@ -13,12 +13,19 @@ class AdminRepository {
                 restaurantRawData;
             await this._pool.query('BEGIN');
             try {
-                const isAdmin = await this._pool.query(
+                const isRestaurant = await this._pool.query(
                     'SELECT * FROM public."restaurants" where name=$1;',
                     [nameRestaurant],
                 );
-                if (isAdmin.rows.length) {
+                if (isRestaurant.rows.length) {
                     return new Error('A restaurant with this name already exists');
+                }
+                const isAdmin = await this._pool.query(
+                    'SELECT * FROM public."admins" where name=$1;',
+                    [nameAdmin],
+                );
+                if (isAdmin.rows.length) {
+                    return new Error('A administrator with this name already exists');
                 }
                 restaurantRawData = await this._pool.query(
                     'INSERT INTO public."restaurants" (name, description) VALUES ($1, $2) RETURNING *;',
@@ -138,6 +145,7 @@ class AdminRepository {
             } catch (error) {
                 this._pool.query('ROLLBACK');
             }
+            console.log(restaurant);
             return restaurant;
         } catch (error) {
             throw Error(error);
