@@ -1,10 +1,10 @@
 import bcrypt           from 'bcryptjs';
 import UserService   from '../services/UserService.js';
-import OrderRepository  from '../repositiories/OrderRepository.js';
-import BasketRepository  from '../repositiories/BasketRepository.js';
-import AddressRepository  from '../repositiories/AddressRepository.js';
-import RestaurantRepository  from '../repositiories/RestaurantRepository.js';
-import ReviewRepository  from '../repositiories/ReviewRepository.js';
+import OrderRepository  from '../repositories/OrderRepository.js';
+import BasketRepository  from '../repositories/BasketRepository.js';
+import AddressRepository  from '../repositories/AddressRepository.js';
+import RestaurantRepository  from '../repositories/RestaurantRepository.js';
+import ReviewRepository  from '../repositories/ReviewRepository.js';
 
 class UserController {
     constructor(pool) {

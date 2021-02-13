@@ -1,6 +1,6 @@
-import RestaurantRepository   from '../repositiories/RestaurantRepository.js';
-import ReviewRepository  from '../repositiories/ReviewRepository.js';
-import DishRepository  from '../repositiories/DishRepository.js';
+import RestaurantRepository   from '../repositories/RestaurantRepository.js';
+import ReviewRepository  from '../repositories/ReviewRepository.js';
+import DishRepository  from '../repositories/DishRepository.js';
 
 class RestaurantController {
     constructor(pool) {

@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node -r dotenv/config ./src/server.js",
     "eslint": "eslint src/**/*.js --fix",
-    "init_db": "./initdb.sh"
+    "init_db": "./initdb.sh",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -39,7 +40,8 @@
     "eslint-config-airbnb-base": "14.1.0",
     "eslint-plugin-import": "2.20.2",
     "husky": "4.2.5",
-    "jest": "25.3.0"
+    "jest": "25.3.0",
+    "supertest": "6.1.1"
   },
   "husky": {
     "hooks": {

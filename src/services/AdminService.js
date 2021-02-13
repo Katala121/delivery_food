@@ -1,10 +1,10 @@
 import bcrypt           from 'bcryptjs';
 import jwt              from 'jsonwebtoken';
-import AdminRepository from '../repositiories/AdminRepository.js';
-import RestaurantRepository from '../repositiories/RestaurantRepository.js';
-import DishRepository from '../repositiories/DishRepository.js';
-import OrderRepository from '../repositiories/OrderRepository.js';
-import ReviewRepository from '../repositiories/ReviewRepository.js';
+import AdminRepository from '../repositories/AdminRepository.js';
+import RestaurantRepository from '../repositories/RestaurantRepository.js';
+import DishRepository from '../repositories/DishRepository.js';
+import OrderRepository from '../repositories/OrderRepository.js';
+import ReviewRepository from '../repositories/ReviewRepository.js';
 
 class AdminService {
     constructor(pool) {

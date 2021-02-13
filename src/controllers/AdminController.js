@@ -1,6 +1,6 @@
 import bcrypt           from 'bcryptjs';
-import OrderRepository  from '../repositiories/OrderRepository.js';
-import AdminRepository  from '../repositiories/AdminRepository.js';
+import OrderRepository  from '../repositories/OrderRepository.js';
+import AdminRepository  from '../repositories/AdminRepository.js';
 import AdminService  from '../services/AdminService.js';
 import RestaurantService  from '../services/RestaurantService.js';
 

@@ -13,6 +13,13 @@ class AdminRepository {
                 restaurantRawData;
             await this._pool.query('BEGIN');
             try {
+                const isAdmin = await this._pool.query(
+                    'SELECT * FROM public."restaurants" where name=$1;',
+                    [nameRestaurant],
+                );
+                if (isAdmin.rows.length) {
+                    return new Error('A restaurant with this name already exists');
+                }
                 restaurantRawData = await this._pool.query(
                     'INSERT INTO public."restaurants" (name, description) VALUES ($1, $2) RETURNING *;',
                     [nameRestaurant, description],

@@ -1,6 +1,6 @@
 import bcrypt           from 'bcryptjs';
 import jwt              from 'jsonwebtoken';
-import RestaurantRepository   from '../repositiories/RestaurantRepository.js';
+import RestaurantRepository   from '../repositories/RestaurantRepository.js';
 
 class RestaurantService {
     constructor(pool) {

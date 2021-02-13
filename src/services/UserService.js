@@ -1,7 +1,7 @@
 import bcrypt           from 'bcryptjs';
 import jwt              from 'jsonwebtoken';
-import UserRepository   from '../repositiories/UserRepository.js';
-import BasketRepository  from '../repositiories/BasketRepository.js';
+import UserRepository   from '../repositories/UserRepository.js';
+import BasketRepository  from '../repositories/BasketRepository.js';
 
 class UserService {
     constructor(pool) {
@@ -22,7 +22,6 @@ class UserService {
             const user = await this.userRepository.createUserAndBasket({
                 name, surname, email, password,
             });
-            console.log(user);
 
             user._token = jwt.sign({
                 email: user.email,
@@ -40,7 +39,7 @@ class UserService {
     async login(email, password) {
         try {
             const user = await this.userRepository.findByEmail(email);
-
+            
             if (bcrypt.compareSync(password, user.password) === true) {
                 user._token = jwt.sign({
                     email: user.email,
