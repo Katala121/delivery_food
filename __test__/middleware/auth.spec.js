@@ -7,6 +7,7 @@ import AdminRouter     from '../../src/routers/AdminRouter.js';
 import UserRepository from '../../src/repositories/UserRepository.js';
 import AdminRepository from '../../src/repositories/AdminRepository.js';
 import auth           from '../../src/middleware/Auth.js';
+import jwt            from 'jsonwebtoken';
 
 const app = express();
 
@@ -21,10 +22,11 @@ const pool = {
 
 jest.mock('../../src/repositories/UserRepository.js');
 jest.mock('../../src/repositories/AdminRepository.js');
+jest.mock('jsonwebtoken');
 
 describe('test auth route', () => {
     test('test authUser method success answer', async () => {
-        const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiIxIiwiaWF0IjoxNjEzMzMxOTg2LCJleHAiOjE2MTM0MTgzODZ9.2YY0t0Ro6ld1A1F4E8oauZ8Mpi95opUlu_bWbZunUaI';
+        const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im15YWRyZXNzQGdtYWlsLmNvbSIsIm5hbWUiOiJBbGV4IiwiaWQiOiIxIiwiaWF0IjoxNjE0MDIyMjY0LCJleHAiOjE2MTQxMDg2NjR9.TgI7VmYpJh4KemhkaHcaxufpRlqFnxjRQ-7Jhxb3SWg';
         
         const user = new User({
             id: '1',
@@ -36,6 +38,9 @@ describe('test auth route', () => {
         UserRepository.mockImplementation(() => ({
                 findByEmailAndId: () => user
         }));
+
+        jwt.decode.mockImplementation(() => user);
+
         const userRouter = new UserRouter(pool);
         const res = await request(app.use('/api/users', userRouter.router))
             .get('/api/users/1')

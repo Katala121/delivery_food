@@ -24,6 +24,7 @@ class Auth {
                 next(new Error('Invalid auth data'));
             }
         } catch (e) {
+            console.log(e);
             next(new Error('Invalid auth data'));
         }
     }

@@ -525,7 +525,7 @@ class UserController {
                 if (request.file === undefined) {
                     response.send('File wasn\'t recieve!');
                 }
-                const fileSrc = request.file.path;
+                const fileSrc = request.file.path.split('/').slice(1).join('/');
                 const avatarSrc = await this.userService.avatarUpload({ id, fileSrc });
                 if (avatarSrc.message) {
                     response.send(avatarSrc.message);

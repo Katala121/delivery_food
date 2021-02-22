@@ -29,7 +29,7 @@ multer.single.mockImplementation(() => {
     return (req, res, next) => {
         req.file = {
             mimetype: 'image/png',
-            path: 'link',
+            path: 'src/files/22_02_2021_22-53_id1.png',
         };
         return next();
     };
@@ -146,6 +146,6 @@ describe('test user route', () => {
 
         const response = res.text;
 
-        expect(JSON.stringify(response)).toBe(JSON.stringify('link'));
+        expect(JSON.stringify(response)).toBe(JSON.stringify('files/22_02_2021_22-53_id1.png'));
     });
 });
