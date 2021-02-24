@@ -1,5 +1,3 @@
-// import Address from '../Models/Address.js';
-
 class AddressRepository {
     constructor(pool) {
         this._pool = pool;

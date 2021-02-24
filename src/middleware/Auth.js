@@ -1,6 +1,6 @@
 import jwt            from 'jsonwebtoken';
-import UserRepository from '../repositiories/UserRepository.js';
-import AdminRepository from '../repositiories/AdminRepository.js';
+import UserRepository from '../repositories/UserRepository.js';
+import AdminRepository from '../repositories/AdminRepository.js';
 import pool           from '../database.js';
 
 class Auth {
@@ -24,6 +24,7 @@ class Auth {
                 next(new Error('Invalid auth data'));
             }
         } catch (e) {
+            console.log(e);
             next(new Error('Invalid auth data'));
         }
     }

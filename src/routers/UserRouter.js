@@ -27,7 +27,6 @@ class UserRouter {
         this._router.route('/:id/favourite_restaurants/:restaurant_id').post(this._userController.addFavouriteRestaurant);
         this._router.route('/:id/favourite_restaurants/:restaurant_id').delete(this._userController.deleteFavouriteRestaurant);
 
-        // this._router.use('/:id/orders', this._auth.checkUser);
         this._router.route('/:id/orders').post(this._userController.createOrder);
         this._router.route('/:id/orders').get(this._userController.getOrders);
         this._router.route('/:id/orders/:order_id').get(this._userController.getOrder);

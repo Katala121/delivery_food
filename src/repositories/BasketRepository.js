@@ -1,5 +1,3 @@
-// import Basket from '../Models/Basket.js';
-
 class BasketRepository {
     constructor(pool) {
         this._pool = pool;

@@ -1,8 +1,7 @@
 import bcrypt           from 'bcryptjs';
-import OrderRepository  from '../repositiories/OrderRepository.js';
-import AdminRepository  from '../repositiories/AdminRepository.js';
+import OrderRepository  from '../repositories/OrderRepository.js';
+import AdminRepository  from '../repositories/AdminRepository.js';
 import AdminService  from '../services/AdminService.js';
-import RestaurantService  from '../services/RestaurantService.js';
 
 class AdminController {
     constructor(pool) {
@@ -24,7 +23,6 @@ class AdminController {
 
         this.adminService = new AdminService(pool);
         this.orderRepository = new OrderRepository(pool);
-        this.restaurantService = new RestaurantService(pool);
         this.adminRepository = new AdminRepository(pool);
     }
 
@@ -42,7 +40,7 @@ class AdminController {
                 nameAdmin, password: hash, nameRestaurant, description,
             });
             if (admin.message) {
-                next(new Error(admin.message));
+                response.send(admin.message);
             }
             response.send(admin);
         } catch (error) {
@@ -57,7 +55,7 @@ class AdminController {
         try {
             const admin = await this.adminService.login({ nameAdmin, password });
             if (admin.message) {
-                next(new Error(admin.message));
+                response.send(admin.message);
             }
             response.send(admin);
         } catch (error) {
